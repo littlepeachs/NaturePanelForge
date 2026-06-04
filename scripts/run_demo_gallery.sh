@@ -6,7 +6,7 @@ SUBJECT="${SUBJECT:-biology}"
 TOPIC="${TOPIC:-AI_biology}"
 
 EXPORT_ARGS=(
-  "${PYTHON_BIN}" export_reproduced_gallery.py
+  "${PYTHON_BIN}" -m nature_panel_forge.export_reproduced_gallery
   --run-dir "${RUN_DIR}" \
   --subject "${SUBJECT}" \
   --topic "${TOPIC}" \

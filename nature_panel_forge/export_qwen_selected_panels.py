@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_SCORES_CSV = BASE_DIR / "PanelScores" / "panel_scores.csv"
 DEFAULT_SCHEMATIC_DIR = BASE_DIR / "Final_Schematic"
 DEFAULT_DATA_DIR = BASE_DIR / "Reproduce_Statistical"

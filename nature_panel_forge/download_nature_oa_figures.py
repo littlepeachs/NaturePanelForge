@@ -26,7 +26,7 @@ from pathlib import Path
 from typing import Iterable
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[1]
 PAPERS_DIR = BASE_DIR / os.environ.get("PAPERS_DIR", "Papers")
 FIGURES_DIR = BASE_DIR / os.environ.get("FIGURES_DIR", "Figures")
 USER_AGENT = "SciFigureHub/1.0 (local research download)"

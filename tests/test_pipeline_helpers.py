@@ -10,9 +10,9 @@ from PIL import Image
 
 from agent_loop import qwen_panel_scoring
 from agent_loop.codex_panel_split import expected_labels, labels_from_caption
-from export_qwen_selected_panels import data_selection_failure_reason
+from nature_panel_forge.export_qwen_selected_panels import data_selection_failure_reason
 from gallery.tools.build_catalog import image_complexity, maybe_float, to_bool
-from prepare_refined_reproduce_panels import eligible_records
+from nature_panel_forge.prepare_refined_reproduce_panels import eligible_records
 
 
 class PipelineHelperTests(unittest.TestCase):

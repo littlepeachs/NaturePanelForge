@@ -10,16 +10,14 @@ It has two core goals:
 Maintainer-hosted gallery demo:
 
 ```text
-http://166.111.35.177:18081/
+https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/
 ```
 
-The repository does not depend on this hosted demo. You can also serve your own exported gallery locally.
+The repository does not depend on this hosted demo.
 
 ![NaturePanelForge gallery home](docs/assets/nature_panel_forge_web1.png)
 
 ![NaturePanelForge gallery catalog](docs/assets/nature_panel_forge_web2.png)
-
-![NaturePanelForge complete workflow](docs/assets/NaturePanelForge_workflow_text_vector.svg)
 
 For the project introduction, methods, current dataset counts, Qwen score distributions, and Codex refine complexity distribution, see [Introduction and Methods](docs/intro_and_methods.md).
 
@@ -27,7 +25,8 @@ For the project introduction, methods, current dataset counts, Qwen score distri
 
 NaturePanelForge uses three executable agent stages. Each stage writes machine-checkable artifacts and can be resumed.
 
-![NaturePanelForge agent workflow](docs/assets/nature_panel_forge_agent_workflow.svg)
+![NaturePanelForge complete workflow](docs/assets/nature_panel_forge_overview.png)
+
 
 **Panel Split** converts a compound full figure into complete panel crops. A split agent writes executable crop/spec logic, and a review agent checks panel letters, axis labels, ticks, legends, colorbars, titles, annotations, and edge visibility.
 
@@ -35,18 +34,31 @@ NaturePanelForge uses three executable agent stages. Each stage writes machine-c
 
 **Final Refine** starts from first-pass reproductions that already passed review. A polish agent edits the existing code, while an audit agent checks Arial typography, label/tick/legend overlap, scientific symbols, edge clipping, compactness, complexity score, and caption-based description.
 
-![NaturePanelForge overview](docs/assets/nature_panel_forge_overview.svg)
+## Codex Reproduction Examples
+
+Target panels from real paper figures are shown beside Codex-rendered outputs. Each reproduction is generated from executable plotting code, not manual image editing.
+
+![Target panels beside Codex reproductions](docs/assets/reproduction_examples/codex_reproduction_pairs.png)
 
 ## Public Modes
 
-Use `forge.py` for the four public workflows:
+Use `forge.py` for the four public workflows. Each mode can be started with one command:
 
 ```bash
-python3 forge.py single-panel-image --image /path/to/target_panel.png --out-root UserRuns/panel_demo
-python3 forge.py single-full-image --image /path/to/full_figure.png --out-root UserRuns/full_demo
-python3 forge.py single-paper --doi 10.1038/s41467-025-12345-6 --download-only
-python3 forge.py batched-paper --subject biology --topic AI_biology --target-papers 20 --batch-size 20
+# 1. Single cropped panel image -> plotting code
+python3 forge.py single-panel-image --image /path/to/target_panel.png --panel-id demo_panel --chart-type bar --caption "A grouped bar chart with error bars and a legend." --out-root UserRuns/panel_demo --model gpt-5.4 --reasoning-effort medium --review-rounds 4 --skip-existing
+
+# 2. Single full figure image -> reviewed panel crops
+python3 forge.py single-full-image --image /path/to/full_figure.png --paper-id demo_paper --caption "A complete multi-panel scientific figure." --out-root UserRuns/full_demo --model gpt-5.4 --reasoning-effort medium --review-rounds 4 --skip-existing
+
+# 3. Single paper -> paper metadata and full figures
+python3 forge.py single-paper --doi 10.1038/s41467-025-12345-6 --subject biology --topic AI_biology --figures-per-paper 5 --download-only
+
+# 4. Batched papers -> full paper-to-panel-to-code workflow
+python3 forge.py batched-paper --subject materials --topic AI_materials --target-papers 20 --batch-size 20 --figures-per-paper 5 --years 2024,2025,2026 --codex-model gpt-5.4 --codex-jobs 8
 ```
+
+The repository root intentionally keeps only one Python entry point, `forge.py`. Internal pipeline modules live under `nature_panel_forge/`, while stage wrappers live under `scripts/`.
 
 `single-panel-image` is the direct user-facing image-to-code path. A live run returns:
 
@@ -95,59 +107,6 @@ export CUDA_VISIBLE_DEVICES=0
 
 The default Qwen path is local `transformers` loading through `--qwen-backend transformers`. `--qwen-backend openai` is only an optional compatibility hook for users who intentionally run an OpenAI-compatible vision endpoint.
 
-## Single Panel To Code
-
-```bash
-python3 forge.py single-panel-image \
-  --image /path/to/target_panel.png \
-  --panel-id demo_panel \
-  --chart-type bar \
-  --caption "A grouped bar chart with error bars and a legend." \
-  --out-root UserRuns/demo_panel \
-  --model gpt-5.4 \
-  --reasoning-effort medium \
-  --review-rounds 4 \
-  --skip-existing
-```
-
-Dry run:
-
-```bash
-python3 forge.py single-panel-image \
-  --image /path/to/target_panel.png \
-  --out-root UserRuns/dry_run \
-  --dry-run \
-  --print-command
-```
-
-## Full Pipeline Demo
-
-Run a small two-paper workflow:
-
-```bash
-TARGET_PAPERS=2 FIGURES_PER_PAPER=2 bash scripts/run_full_pipeline.sh
-```
-
-Scale to a production batch by changing environment variables:
-
-```bash
-SUBJECT=materials \
-TOPIC=AI_materials \
-QUERY_DOMAIN=materials \
-YEARS=2024,2025,2026 \
-TARGET_PAPERS=200 \
-BATCH_SIZE=200 \
-FIGURES_PER_PAPER=5 \
-FULL_FIGURE_WORKERS=16 \
-CODEX_MODEL=gpt-5.4 \
-CODEX_JOBS=32 \
-MAX_CODEX_PROCESSES=40 \
-CODEX_TIMEOUT=3000 \
-CODEX_REVIEW_ROUNDS=4 \
-SCORE_BATCH_SIZE=16 \
-bash scripts/run_full_pipeline.sh
-```
-
 ## Install The Codex Skill
 
 Yes, the Codex reproduce/refine workflow can be packaged as a local skill. This repository includes:
@@ -192,35 +151,19 @@ Steps:
 
 After installation, local Codex can read the `codex-panel-reproduce` skill and follow the single-panel reproduction/refine workflow without re-learning the prompt structure from scratch.
 
-## Gallery And Demo Videos
-
-Serve a local gallery export:
-
-```bash
-cd gallery
-python3 -m http.server 18081 --bind 0.0.0.0
-```
-
-Open:
-
-```text
-http://<server-ip>:18081/
-```
-
-For recording demos, see [Demo Videos](docs/demo_videos.md). The repo remains code-only, so generated videos should be published as release assets or external links rather than committed into the source tree.
-
 ## Repository Layout
 
 ```text
-agent_loop/                         # panel splitting, manifest building, Qwen scoring
+forge.py                            # single public Python CLI entry point
+nature_panel_forge/                 # internal paper, figure, export, refine, and image-to-code modules
+agent_loop/                         # Codex panel splitting, manifest building, Qwen scoring
 examples/                           # Codex reproduction and final-refine batch drivers
-gallery/                            # static gallery shell and catalog builder
 scripts/                            # portable stage wrappers and skill installer
+gallery/                            # static gallery shell and catalog builder
 skills/                             # local Codex skill packages
 configs/                            # environment templates
-docs/                               # architecture, policy, troubleshooting, visual assets
+docs/                               # architecture, methods, and visual assets
 prompts/                            # agent prompt blueprints
-*.py                                # paper download, full figure, export, refine prep
 ```
 
 Generated run directories look like:
@@ -238,34 +181,11 @@ PipelineRuns/<subject>/<topic>/run_YYYYMMDD_HHMMSS_batch001/
   Reproduce_Statistical_Refined/
 ```
 
-## Tests
-
-Run unit tests without downloading data or calling Codex:
-
-```bash
-PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
-```
-
-The tests cover the four public CLI modes, single-image result-contract validation, full-image manifest creation, exact DOI/PMCID query construction, Qwen score normalization, selection thresholds, refine eligibility, gallery complexity helpers, and dry-run execution.
-
-## Data Policy
-
-This repository is code-only.
-
-- No Nature figure images are included.
-- No downloaded papers or full-figure PDFs are included.
-- No generated panels or reproduced images are included.
-- No model weights are included.
-- Users are responsible for complying with source licenses when downloading open-access figures.
-- Generated reproductions are silver-standard executable references, not original author code.
-
 ## More Documentation
 
 - [Tutorial](TUTORIAL.md)
 - [Architecture](docs/architecture.md)
-- [Data policy](docs/data_policy.md)
-- [Troubleshooting](docs/troubleshooting.md)
-- [Demo videos](docs/demo_videos.md)
+- [Introduction and Methods](docs/intro_and_methods.md)
 
 ## Citation
 

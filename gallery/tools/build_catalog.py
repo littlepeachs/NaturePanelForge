@@ -219,6 +219,13 @@ def summarize_refine_complexity(values: list[float]) -> dict[str, Any]:
     }
 
 
+def item_complexity_sort_value(item: dict[str, Any]) -> float:
+    refine_score = item.get("refineComplexity", {}).get("score")
+    if refine_score is not None:
+        return to_float(refine_score)
+    return to_float(item.get("complexity", {}).get("score")) / 10.0
+
+
 def dataset_label(dataset_dir: Path) -> str:
     return " / ".join(dataset_dir.relative_to(GALLERY_ROOT).parts)
 
@@ -432,11 +439,11 @@ def main() -> None:
             "summary": rel(dataset_dir / "summary.json"),
         }
         dataset_items = [build_item(dataset_stub, row) for row in manifest]
-        dataset_items.sort(key=lambda item: (item["sort"]["quality"], item["sort"]["review"], item["sort"]["date"]), reverse=True)
+        dataset_items.sort(key=lambda item: (item_complexity_sort_value(item), item["sort"]["quality"], item["sort"]["review"], item["sort"]["date"]), reverse=True)
         datasets.append(summarize_dataset(dataset_dir, summary, dataset_items))
         items.extend(dataset_items)
 
-    items.sort(key=lambda item: (item["sort"]["quality"], item["sort"]["review"], item["sort"]["date"]), reverse=True)
+    items.sort(key=lambda item: (item_complexity_sort_value(item), item["sort"]["quality"], item["sort"]["review"], item["sort"]["date"]), reverse=True)
 
     subtypes = Counter(item["subtype"] for item in items)
     journals = Counter(item["journal"] for item in items if item["journal"])

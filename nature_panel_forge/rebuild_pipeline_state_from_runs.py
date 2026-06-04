@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from run_continuous_pipeline import (
+from nature_panel_forge.run_continuous_pipeline import (
     BASE_DIR,
     normalize_doi,
     normalize_pmcid,

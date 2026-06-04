@@ -9,7 +9,7 @@ REVIEWS_DIR="${REVIEWS_DIR:-${RUN_DIR}/Reproduce_Statistical_Reviews}"
 SPECS_DIR="${SPECS_DIR:-${RUN_DIR}/Reproduce_Statistical_Specs}"
 
 EXPORT_ARGS=(
-  "${PYTHON_BIN}" export_qwen_selected_panels.py
+  "${PYTHON_BIN}" -m nature_panel_forge.export_qwen_selected_panels
   --scores-csv "${SCORES_CSV}" \
   --schematic-dir "${SCHEMATIC_DIR}" \
   --data-dir "${DATA_DIR}" \

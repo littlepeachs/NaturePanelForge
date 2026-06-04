@@ -7,7 +7,7 @@ if [[ -z "${IMAGE_PATH:-}" ]]; then
 fi
 
 ARGS=(
-  "${PYTHON_BIN}" reproduce_image.py
+  "${PYTHON_BIN}" -m nature_panel_forge.reproduce_image
   --image "${IMAGE_PATH}"
   --out-root "${OUT_ROOT:-${NPF_ROOT}/UserRuns/single_image_demo}"
   --chart-type "${CHART_TYPE:-user_supplied}"

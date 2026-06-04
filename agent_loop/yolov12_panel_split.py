@@ -263,7 +263,7 @@ def classify_caption_crop(image: Image.Image, caption: DetectedBox, allowed_labe
     try:
         if str(BASE_DIR) not in sys.path:
             sys.path.insert(0, str(BASE_DIR))
-        from build_figure_assets import classify_label_crop
+        from nature_panel_forge.build_figure_assets import classify_label_crop
     except Exception:
         return None
     pad = max(3, int(max(caption.width, caption.height) * 0.25))

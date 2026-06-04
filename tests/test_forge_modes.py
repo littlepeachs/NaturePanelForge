@@ -104,7 +104,7 @@ class ForgeModeTests(unittest.TestCase):
                 self.assertEqual(forge.main(), 0)
 
             self.assertEqual(len(calls), 1)
-            self.assertIn("reproduce_image.py", calls[0][1])
+            self.assertIn("nature_panel_forge.reproduce_image", calls[0])
             self.assertIn("--dry-run", calls[0])
             self.assertIn("--panel-id", calls[0])
             self.assertIn("panel-a", calls[0])
@@ -172,7 +172,7 @@ class ForgeModeTests(unittest.TestCase):
             self.assertEqual(forge.main(), 0)
 
         self.assertEqual(len(calls), 1)
-        self.assertIn("run_continuous_pipeline.py", calls[0][1])
+        self.assertIn("nature_panel_forge.run_continuous_pipeline", calls[0])
         self.assertIn("--target-papers", calls[0])
         self.assertEqual(calls[0][calls[0].index("--target-papers") + 1], "1")
         self.assertIn("--search-term", calls[0])

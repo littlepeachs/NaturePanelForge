@@ -24,7 +24,7 @@ fi
 
 START_EPOCH="$(date +%s)"
 CMD=(
-  "${PYTHON_BIN}" run_continuous_pipeline.py
+  "${PYTHON_BIN}" -m nature_panel_forge.run_continuous_pipeline
   --subject "${SUBJECT}"
   --topic "${TOPIC}"
   --batch-size "${BATCH_SIZE}"

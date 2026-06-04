@@ -10,7 +10,7 @@ from unittest import mock
 
 from PIL import Image
 
-import reproduce_image
+from nature_panel_forge import reproduce_image
 
 
 def make_image(path: Path, size: tuple[int, int] = (120, 80)) -> None:

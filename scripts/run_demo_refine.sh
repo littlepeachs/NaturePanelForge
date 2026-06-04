@@ -10,7 +10,7 @@ REFINED_REVIEWS_DIR="${REFINED_REVIEWS_DIR:-${RUN_DIR}/Reproduce_Statistical_Ref
 REFINED_SPECS_DIR="${REFINED_SPECS_DIR:-${RUN_DIR}/Reproduce_Statistical_Refined_Specs}"
 
 PREPARE_ARGS=(
-  "${PYTHON_BIN}" prepare_refined_reproduce_panels.py
+  "${PYTHON_BIN}" -m nature_panel_forge.prepare_refined_reproduce_panels
   --source-data-dir "${SOURCE_DATA_DIR}" \
   --source-reviews-dir "${SOURCE_REVIEWS_DIR}" \
   --source-specs-dir "${SOURCE_SPECS_DIR}" \

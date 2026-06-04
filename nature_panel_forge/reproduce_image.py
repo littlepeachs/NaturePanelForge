@@ -16,7 +16,7 @@ from typing import Any
 from PIL import Image, ImageOps
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[1]
 
 
 def safe_name(value: str) -> str:

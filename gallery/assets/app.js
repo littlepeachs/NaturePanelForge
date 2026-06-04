@@ -6,7 +6,7 @@ const RESULT_PAGE_SIZE = 60;
 
 const DEFAULT_FILTERS = {
   q: "",
-  sort: "quality",
+  sort: "complexity",
   minScore: "0",
   review: "all",
   rounds: "all",
@@ -1425,6 +1425,7 @@ function labelForSort(sort) {
   const labels = {
     relevance: t("relevance"),
     quality: t("qualityScore"),
+    complexity: t("complexity"),
     review: t("reviewConfidence"),
     date: t("publicationDate"),
     subtype: t("subtype"),

@@ -36,7 +36,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 from scipy import ndimage
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[1]
 PAPERS_JSON = BASE_DIR / os.environ.get("PAPERS_JSON", "Papers/papers.json")
 FULL_FIGURES_DIR = BASE_DIR / os.environ.get("FULL_FIGURES_DIR", "FullFigures")
 FIGURE_PDFS_DIR = BASE_DIR / os.environ.get("FIGURE_PDFS_DIR", "FigurePDFs")

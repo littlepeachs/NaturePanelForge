@@ -17,7 +17,7 @@ from typing import Any
 
 from PIL import Image, ImageOps
 
-import reproduce_image
+from nature_panel_forge import reproduce_image
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -183,7 +183,8 @@ def add_codex_common(parser: argparse.ArgumentParser) -> None:
 def single_panel_image(args: argparse.Namespace) -> int:
     cmd = [
         sys.executable,
-        str(BASE_DIR / "reproduce_image.py"),
+        "-m",
+        "nature_panel_forge.reproduce_image",
         "--image",
         str(resolve_path(args.image)),
         "--out-root",
@@ -281,7 +282,8 @@ def paper_command(args: argparse.Namespace, *, target_papers: int, batch_size: i
     query = paper_identifier_query(args)
     cmd = [
         sys.executable,
-        str(BASE_DIR / "run_continuous_pipeline.py"),
+        "-m",
+        "nature_panel_forge.run_continuous_pipeline",
         "--subject",
         args.subject,
         "--topic",

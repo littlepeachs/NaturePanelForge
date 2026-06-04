@@ -14,7 +14,7 @@ The GitHub-facing entry point is `forge.py`, which exposes four modes:
 Maintainer-hosted gallery demo:
 
 ```text
-http://166.111.35.177:18081/
+https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/
 ```
 
 The repository does not depend on this hosted demo. The gallery is a static site and can be served from any exported gallery directory.
@@ -30,9 +30,9 @@ Input:
 Core files:
 
 - `agent_loop/keyword_query_builder.py`
-- `download_nature_oa_figures.py`
-- `build_figure_assets.py`
-- `run_continuous_pipeline.py`
+- `nature_panel_forge/download_nature_oa_figures.py`
+- `nature_panel_forge/build_figure_assets.py`
+- `nature_panel_forge/run_continuous_pipeline.py`
 
 Output:
 
@@ -82,7 +82,7 @@ Output:
 
 Core files:
 
-- `export_qwen_selected_panels.py`
+- `nature_panel_forge/export_qwen_selected_panels.py`
 - `examples/prompt_codex_reproduce_fig02_g.py`
 
 Agent loop:
@@ -109,7 +109,7 @@ Output:
 Core files:
 
 - `forge.py`
-- `reproduce_image.py`
+- `nature_panel_forge/reproduce_image.py`
 - `scripts/reproduce_image.sh`
 - `examples/prompt_codex_reproduce_fig02_g.py`
 
@@ -152,7 +152,7 @@ Output:
 
 Core files:
 
-- `prepare_refined_reproduce_panels.py`
+- `nature_panel_forge/prepare_refined_reproduce_panels.py`
 - `examples/prompt_codex_refine_reproduce.py`
 
 The refine stage only starts from first-pass panels with `review_passed=true`.
@@ -180,7 +180,7 @@ Output:
 
 Core files:
 
-- `export_reproduced_gallery.py`
+- `nature_panel_forge/export_reproduced_gallery.py`
 - `gallery/tools/build_catalog.py`
 - `gallery/index.html`
 - `gallery/assets/app.js`

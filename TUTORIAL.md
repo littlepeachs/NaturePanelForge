@@ -9,7 +9,7 @@ paper/full figure -> panel split -> Qwen score -> Codex reproduce -> final refin
 Gallery demo:
 
 ```text
-http://166.111.35.177:18081/
+https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/
 ```
 
 ## 1. Install

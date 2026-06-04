@@ -20,7 +20,7 @@ Use this for code-only reproduction or refinement of one scientific figure panel
 Run from the NaturePanelForge repo root:
 
 ```bash
-python3 reproduce_image.py \
+python3 -m nature_panel_forge.reproduce_image \
   --image path/to/target_panel.png \
   --out-root UserRuns/single_panel \
   --panel-id my_panel \
@@ -62,7 +62,7 @@ Expected mirrored review/spec outputs:
 Use `--dry-run` before a live run to create/check task context and print the nested Codex prompt without running it:
 
 ```bash
-python3 reproduce_image.py --image path/to/target_panel.png --out-root UserRuns/dry_run --dry-run --print-command
+python3 -m nature_panel_forge.reproduce_image --image path/to/target_panel.png --out-root UserRuns/dry_run --dry-run --print-command
 ```
 
 For existing panel directories, add `--dry-run` to the batch reproduce or refine command.

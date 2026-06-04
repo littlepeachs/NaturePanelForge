@@ -23,7 +23,7 @@ from typing import Any
 from urllib.parse import unquote
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_QWEN_MODEL = Path(os.environ.get("QWEN_MODEL_PATH", str(BASE_DIR / "models" / "Qwen3.6-27B")))
 DOI_PATTERN = re.compile(r"(10\.\d{4,9}/[-._;()/:A-Za-z0-9]+)")
 NATURE_DOI_PATTERN = re.compile(r"(10\.1038/[A-Za-z0-9._-]+)")
@@ -517,7 +517,7 @@ def download_papers(args: argparse.Namespace, path_map: dict[str, Path], state: 
         "ALLOW_PARTIAL_DOWNLOAD": "1",
     }
     run_command(
-        [sys.executable, "download_nature_oa_figures.py"],
+        [sys.executable, "-m", "nature_panel_forge.download_nature_oa_figures"],
         log_path=path_map["logs"] / "01_download.log",
         env=env,
         dry_run=args.dry_run,
@@ -543,7 +543,7 @@ def build_full_figures(args: argparse.Namespace, path_map: dict[str, Path]) -> N
         "BUILD_FIGURE_ASSETS_BATCH_SLEEP": str(args.full_figure_batch_sleep),
     }
     run_command(
-        [sys.executable, "build_figure_assets.py"],
+        [sys.executable, "-m", "nature_panel_forge.build_figure_assets"],
         log_path=path_map["logs"] / "02_full_figures.log",
         env=env,
         dry_run=args.dry_run,
