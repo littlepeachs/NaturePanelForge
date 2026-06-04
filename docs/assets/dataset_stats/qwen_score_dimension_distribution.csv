@@ -1,0 +1,15 @@
+metric,value,count
+clarity_integrity_score,7,2
+clarity_integrity_score,8,48
+clarity_integrity_score,9,98
+clarity_integrity_score,10,8237
+data_purity_score,10,8385
+code_reproducibility_score,9,8292
+code_reproducibility_score,10,93
+aesthetic_score,8,4320
+aesthetic_score,9,4065
+overall_quality_score,7,2
+overall_quality_score,8,48
+overall_quality_score,9,8238
+overall_quality_score,9.5,8
+overall_quality_score,10,89

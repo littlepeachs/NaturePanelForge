@@ -1,0 +1,707 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">NaturePanelForge workflow</title>
+  <desc id="desc">Vector recreation of the NaturePanelForge workflow infographic with editable, high-resolution text.</desc>
+  <defs>
+    <style>
+      :root {
+        --ink: #111111;
+        --muted: #4b5563;
+        --line: #9ca3af;
+        --blue: #2f67b2;
+        --deep-blue: #1e4f97;
+        --purple: #6c4aa0;
+        --green: #2f7a43;
+        --orange: #f07b00;
+        --soft-blue: #dceafd;
+        --pale-green: #d9efcf;
+      }
+      text {
+        font-family: Arial, Helvetica, sans-serif;
+        fill: var(--ink);
+        dominant-baseline: auto;
+      }
+      .title { font-size: 25px; font-weight: 700; }
+      .step-title { font-size: 18px; font-weight: 700; }
+      .small-title { font-size: 14px; font-weight: 700; }
+      .body { font-size: 14px; }
+      .body-sm { font-size: 12px; }
+      .tiny { font-size: 9px; }
+      .axis { font-size: 12px; }
+      .caption { font-size: 16px; }
+      .bold { font-weight: 700; }
+      .italic { font-style: italic; }
+      .white { fill: #ffffff; }
+      .muted { fill: var(--muted); }
+      .card { fill: #ffffff; stroke: #8f98a3; stroke-width: 1.1; }
+      .inner-card { fill: #ffffff; stroke: #9aa8c0; stroke-width: 1; }
+      .shadow-line { stroke: #c5ced8; stroke-width: 1; }
+      .grid { stroke: #e5e7eb; stroke-width: 1; }
+      .axis-line { stroke: #111111; stroke-width: 1.1; }
+      .thin { stroke-width: 1; }
+      .check { fill: #f6fff2; stroke: #53a536; stroke-width: 1.5; }
+      .check-mark { fill: none; stroke: #2d8f19; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+      .arrow { stroke: #111111; stroke-width: 2; fill: none; marker-end: url(#arrowHead); }
+      .mini-axis { stroke: #111111; stroke-width: 0.9; fill: none; }
+      .blue-stroke { stroke: #2f67b2; }
+      .blue-fill { fill: #2f67b2; }
+      .purple-fill { fill: #64479a; }
+      .green-fill { fill: #5aa86b; }
+      .orange-fill { fill: #f0a13a; }
+      .steel-fill { fill: #8595c2; }
+    </style>
+
+    <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"/>
+    </marker>
+    <marker id="smallArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"/>
+    </marker>
+
+    <linearGradient id="blueHeader" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#75a4df"/>
+      <stop offset="1" stop-color="#4f7fbd"/>
+    </linearGradient>
+    <linearGradient id="purpleHeader" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#8a6bb6"/>
+      <stop offset="1" stop-color="#6d4aa0"/>
+    </linearGradient>
+    <linearGradient id="orangeHeader" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#ff8a00"/>
+      <stop offset="1" stop-color="#ef6f00"/>
+    </linearGradient>
+
+    <symbol id="checkItem" viewBox="0 0 16 16">
+      <rect class="check" x="1.5" y="1.5" width="13" height="13" rx="2"/>
+      <path class="check-mark" d="M4.2 8.2l2.4 2.7 5.2-6.1"/>
+    </symbol>
+
+    <symbol id="paperIcon" viewBox="0 0 42 50">
+      <path d="M8 1h20l11 11v37H8z" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+      <path d="M28 1v12h11" fill="none" stroke="#111111" stroke-width="1.4"/>
+      <path d="M14 19h17M14 25h17M14 31h14M14 37h16" stroke="#111111" stroke-width="1.3"/>
+    </symbol>
+
+    <symbol id="codeIcon" viewBox="0 0 58 42">
+      <rect x="1" y="1" width="56" height="40" rx="4" fill="#e8eef8" stroke="#111111" stroke-width="1.4"/>
+      <rect x="1" y="1" width="56" height="9" rx="4" fill="#426da9"/>
+      <circle cx="8" cy="5.6" r="1.5" fill="#f15b5b"/>
+      <circle cx="14" cy="5.6" r="1.5" fill="#f8ca38"/>
+      <circle cx="20" cy="5.6" r="1.5" fill="#4dbb67"/>
+      <path d="M22 16l-8 7 8 7M36 16l8 7-8 7M31 15l-5 17" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="clipboardIcon" viewBox="0 0 50 58">
+      <rect x="7" y="8" width="36" height="47" rx="3" fill="#f3f8ff" stroke="#111111" stroke-width="1.5"/>
+      <path d="M18 8c0-4 3-6 7-6s7 2 7 6h8v9H10V8z" fill="#9eb8df" stroke="#111111" stroke-width="1.5"/>
+      <path d="M17 29l6 6 11-12M17 44l6 6 11-12" fill="none" stroke="#234f8d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="magnifyIcon" viewBox="0 0 60 54">
+      <use href="#clipboardIcon" x="0" y="0" width="43" height="50"/>
+      <circle cx="39" cy="38" r="8" fill="#ffffff" stroke="#111111" stroke-width="1.6"/>
+      <path d="M45 44l10 8" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="photoIcon" viewBox="0 0 45 34">
+      <rect x="2" y="4" width="39" height="26" rx="3" fill="#ffffff" stroke="#111111" stroke-width="1.3"/>
+      <circle cx="14" cy="13" r="4" fill="#dce7f6" stroke="#111111" stroke-width="1"/>
+      <path d="M7 27l10-9 7 6 6-8 8 11z" fill="#edf6ee" stroke="#111111" stroke-width="1.1"/>
+    </symbol>
+
+    <symbol id="gearIcon" viewBox="0 0 42 36">
+      <path d="M21 3l3 5 6-1 3 5-4 4 2 5 6 2v6l-6 2-2 5 4 4-3 5-6-1-3 5-6-3 1-6-4-4-6 1-3-5 4-4-2-5-6-2v-6l6-2 2-5-4-4 3-5 6 1 4-4z" transform="translate(0 -6) scale(.85)" fill="#ffffff" stroke="#111111" stroke-width="1.5"/>
+      <circle cx="18" cy="17" r="5" fill="#e9eef8" stroke="#111111" stroke-width="1.3"/>
+    </symbol>
+
+    <symbol id="gaugeIcon" viewBox="0 0 62 44">
+      <path d="M8 36a23 23 0 0 1 46 0" fill="#ffffff" stroke="#111111" stroke-width="1.5"/>
+      <path d="M14 36a17 17 0 0 1 5-12" stroke="#31a5c5" stroke-width="3" fill="none"/>
+      <path d="M21 21a17 17 0 0 1 12-4" stroke="#f2c94c" stroke-width="3" fill="none"/>
+      <path d="M36 18a17 17 0 0 1 12 9" stroke="#f07b00" stroke-width="3" fill="none"/>
+      <path d="M31 35l13-13" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="31" cy="35" r="4" fill="#ffffff" stroke="#111111" stroke-width="1.3"/>
+    </symbol>
+
+    <symbol id="speechIcon" viewBox="0 0 58 42">
+      <path d="M8 5h42a6 6 0 0 1 6 6v17a6 6 0 0 1-6 6H24l-10 7 3-7H8a6 6 0 0 1-6-6V11a6 6 0 0 1 6-6z" fill="#ffffff" stroke="#111111" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="2" fill="#111111"/>
+      <circle cx="30" cy="20" r="2" fill="#111111"/>
+      <circle cx="40" cy="20" r="2" fill="#111111"/>
+    </symbol>
+  </defs>
+
+  <rect x="1" y="1" width="1534" height="1022" rx="7" fill="#ffffff" stroke="#9ca3af" stroke-width="1"/>
+  <text class="title" x="18" y="37">NaturePanelForge workflow</text>
+
+  <!-- Top workflow cards -->
+  <g id="workflow">
+    <rect class="card" x="17" y="56" width="268" height="460" rx="10"/>
+    <rect class="card" x="300" y="56" width="230" height="460" rx="10"/>
+    <rect class="card" x="547" y="56" width="251" height="460" rx="10"/>
+    <rect class="card" x="813" y="56" width="231" height="460" rx="10"/>
+    <rect class="card" x="1060" y="56" width="214" height="460" rx="10"/>
+    <rect class="card" x="1289" y="56" width="231" height="460" rx="10"/>
+
+    <path class="arrow" d="M285 258h18"/>
+    <path class="arrow" d="M530 258h18"/>
+    <path class="arrow" d="M798 258h17"/>
+    <path class="arrow" d="M1044 258h18"/>
+    <path class="arrow" d="M1274 258h17"/>
+
+    <!-- Step 1 -->
+    <g id="step1">
+      <circle cx="52" cy="90" r="17" fill="#1e4f97"/>
+      <text class="white bold" x="52" y="99" font-size="26" text-anchor="middle">1</text>
+      <text class="step-title" text-anchor="middle">
+        <tspan x="166" y="89">Paper retrieval &amp;</tspan>
+        <tspan x="166" y="111">full-figure acquisition</tspan>
+      </text>
+
+      <g transform="translate(33 143)">
+        <path d="M0 8l27-8 28 8-28 9z" fill="#d7d7d7" stroke="#111111" stroke-width="1"/>
+        <path d="M7 16h41v27H7z" fill="#efefef" stroke="#111111" stroke-width="1"/>
+        <path d="M12 21h31M12 27h31M12 33h31" stroke="#777777" stroke-width="1"/>
+        <text x="27.5" y="33" font-size="18" font-weight="700" text-anchor="middle">PMC</text>
+      </g>
+      <g transform="translate(98 139)">
+        <rect x="0" y="0" width="68" height="47" rx="4" fill="#ffffff" stroke="#9ca3af"/>
+        <text x="7" y="22" font-size="16" font-weight="700">nature</text>
+        <text x="7" y="38" font-size="16">portfolio</text>
+      </g>
+      <g transform="translate(184 140)">
+        <path d="M16 0h31l11 11v45H16z" fill="#ffffff" stroke="#111111" stroke-width="1.2"/>
+        <path d="M10 6h31l11 11v45H10z" fill="#ffffff" stroke="#111111" stroke-width="1.2"/>
+        <path d="M4 12h31l11 11v45H4z" fill="#ffffff" stroke="#111111" stroke-width="1.2"/>
+        <path d="M35 12v12h11" fill="none" stroke="#111111" stroke-width="1.2"/>
+        <path d="M13 31h22M13 38h22M13 45h18" stroke="#111111" stroke-width="1"/>
+        <rect x="14" y="18" width="9" height="10" fill="none" stroke="#111111" stroke-width="1"/>
+      </g>
+      <path d="M145 199v29" stroke="#111111" stroke-width="1.7" marker-end="url(#smallArrow)"/>
+
+      <rect x="31" y="233" width="244" height="170" rx="2" fill="#ffffff" stroke="#9ca3af"/>
+      <g transform="translate(48 249)">
+        <path class="mini-axis" d="M0 61h72M0 61v-58"/>
+        <polyline points="5,50 17,33 30,40 42,19 54,25 66,14" fill="none" stroke="#2f67b2" stroke-width="1.8"/>
+        <g fill="#2f67b2"><circle cx="5" cy="50" r="2"/><circle cx="17" cy="33" r="2"/><circle cx="30" cy="40" r="2"/><circle cx="42" cy="19" r="2"/><circle cx="54" cy="25" r="2"/><circle cx="66" cy="14" r="2"/></g>
+        <g class="tiny" fill="#333"><text x="-2" y="-2">1</text><text x="32" y="74">x</text></g>
+      </g>
+      <g transform="translate(134 249)">
+        <rect x="0" y="0" width="64" height="62" fill="#f8fafc" stroke="#cbd5e1"/>
+        <g opacity=".9">
+          <rect x="0" y="0" width="16" height="15" fill="#b6c9e9"/><rect x="16" y="0" width="16" height="15" fill="#90afd8"/><rect x="32" y="0" width="16" height="15" fill="#7399cf"/><rect x="48" y="0" width="16" height="15" fill="#4d7abb"/>
+          <rect x="0" y="15" width="16" height="16" fill="#d4e1f4"/><rect x="16" y="15" width="16" height="16" fill="#adc4e4"/><rect x="32" y="15" width="16" height="16" fill="#86a9d8"/><rect x="48" y="15" width="16" height="16" fill="#668dc9"/>
+          <rect x="0" y="31" width="16" height="16" fill="#8fafdc"/><rect x="16" y="31" width="16" height="16" fill="#6c94cd"/><rect x="32" y="31" width="16" height="16" fill="#4073b8"/><rect x="48" y="31" width="16" height="16" fill="#2f5fa5"/>
+          <rect x="0" y="47" width="16" height="15" fill="#b8cdea"/><rect x="16" y="47" width="16" height="15" fill="#94b2db"/><rect x="32" y="47" width="16" height="15" fill="#7096ca"/><rect x="48" y="47" width="16" height="15" fill="#4b78b8"/>
+        </g>
+        <path d="M0 0h64v62H0z" fill="none" stroke="#94a3b8"/>
+      </g>
+      <g transform="translate(215 249)">
+        <path class="mini-axis" d="M0 61h42M0 61v-58"/>
+        <rect x="5" y="35" width="10" height="26" class="blue-fill"/><rect x="19" y="24" width="10" height="37" class="blue-fill"/><rect x="33" y="15" width="10" height="46" class="blue-fill"/>
+        <text class="tiny" x="-2" y="-2">1</text>
+      </g>
+      <g transform="translate(48 326)">
+        <path class="mini-axis" d="M0 61h72M0 61v-58"/>
+        <polyline points="5,52 17,44 30,48 42,32 54,36 66,22" fill="none" stroke="#2f67b2" stroke-width="1.8"/>
+        <g fill="#2f67b2"><circle cx="5" cy="52" r="2"/><circle cx="17" cy="44" r="2"/><circle cx="30" cy="48" r="2"/><circle cx="42" cy="32" r="2"/><circle cx="54" cy="36" r="2"/><circle cx="66" cy="22" r="2"/></g>
+      </g>
+      <g transform="translate(134 326)">
+        <circle cx="32" cy="31" r="29" fill="#ffffff" stroke="#111111" stroke-width=".9"/>
+        <g stroke="#cbd5e1" stroke-width=".8">
+          <circle cx="32" cy="31" r="21" fill="none"/><circle cx="32" cy="31" r="12" fill="none"/>
+          <path d="M32 2v58M3 31h58M12 10l40 42M52 10L12 52M20 5l24 52M5 20l54 22"/>
+        </g>
+        <polygon points="32,9 43,18 50,31 40,43 28,50 18,39 14,27 22,15" fill="#d8dde8" opacity=".8" stroke="#2f67b2"/>
+      </g>
+      <g transform="translate(223 334)">
+        <path d="M0 0h25l12 12v45H0z" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+        <path d="M25 0v13h12" fill="none" stroke="#111111" stroke-width="1.1"/>
+        <rect x="1" y="27" width="28" height="15" rx="2" fill="#ff1f1f"/>
+        <text class="white bold" x="15" y="39" font-size="10" text-anchor="middle">PDF</text>
+      </g>
+      <text class="body">
+        <tspan x="31" y="449">Query open-access Nature-family</tspan>
+        <tspan x="31" y="470">papers. Record metadata and</tspan>
+        <tspan x="31" y="491">download full-resolution figures</tspan>
+        <tspan x="31" y="510">and PDFs.</tspan>
+      </text>
+    </g>
+
+    <!-- Step 2 -->
+    <g id="step2">
+      <circle cx="335" cy="90" r="17" fill="#1e4f97"/>
+      <text class="white bold" x="335" y="99" font-size="26" text-anchor="middle">2</text>
+      <text class="step-title" text-anchor="middle">
+        <tspan x="416" y="89">Panel split</tspan>
+        <tspan x="416" y="111">agent loop</tspan>
+      </text>
+
+      <rect class="inner-card" x="313" y="136" width="205" height="128" rx="5"/>
+      <path d="M318 136h195a5 5 0 0 1 5 5v20H313v-20a5 5 0 0 1 5-5z" fill="url(#blueHeader)"/>
+      <text class="white small-title" x="416" y="153" text-anchor="middle">Split agent</text>
+      <rect x="322" y="172" width="72" height="72" fill="#ffffff" stroke="#ef4444" stroke-width="1.1" stroke-dasharray="2 2"/>
+      <rect x="402" y="176" width="63" height="72" fill="#ffffff" stroke="#ef4444" stroke-width="1.1" stroke-dasharray="2 2"/>
+      <rect x="471" y="176" width="35" height="72" fill="#ffffff" stroke="#ef4444" stroke-width="1.1" stroke-dasharray="2 2"/>
+      <text class="tiny bold" x="322" y="170">a</text>
+      <text class="tiny bold" x="402" y="174">b</text>
+      <text class="tiny bold" x="471" y="174">c</text>
+      <g transform="translate(329 184)">
+        <path class="mini-axis" d="M0 53h60M0 53v-48"/>
+        <polyline points="2,50 12,9 22,44 31,51 40,49 51,51 58,31" fill="none" stroke="#2f67b2" stroke-width="1.5"/>
+        <g fill="#2f67b2"><circle cx="2" cy="50" r="1.8"/><circle cx="12" cy="9" r="1.8"/><circle cx="22" cy="44" r="1.8"/><circle cx="31" cy="51" r="1.8"/><circle cx="40" cy="49" r="1.8"/><circle cx="51" cy="51" r="1.8"/><circle cx="58" cy="31" r="1.8"/></g>
+      </g>
+      <g transform="translate(408 185)">
+        <path class="mini-axis" d="M0 53h52M0 53v-48"/>
+        <path d="M4 46L48 6" stroke="#777" stroke-width="1.1"/>
+        <polyline points="4,42 12,36 20,44 28,25 36,20 46,8" fill="none" stroke="#2f67b2" stroke-width="1.5"/>
+        <g fill="#2f67b2"><circle cx="4" cy="42" r="1.6"/><circle cx="12" cy="36" r="1.6"/><circle cx="20" cy="44" r="1.6"/><circle cx="28" cy="25" r="1.6"/><circle cx="36" cy="20" r="1.6"/><circle cx="46" cy="8" r="1.6"/></g>
+      </g>
+      <g transform="translate(477 190)">
+        <path class="mini-axis" d="M0 48h25M0 48v-44"/>
+        <rect x="3" y="27" width="5" height="21" class="blue-fill"/><rect x="11" y="17" width="5" height="31" class="blue-fill"/><rect x="19" y="6" width="5" height="42" class="blue-fill"/>
+      </g>
+      <path d="M416 264v16" stroke="#111111" stroke-width="1.5" marker-end="url(#smallArrow)"/>
+
+      <rect class="inner-card" x="313" y="283" width="205" height="139" rx="5"/>
+      <path d="M318 283h195a5 5 0 0 1 5 5v19H313v-19a5 5 0 0 1 5-5z" fill="url(#blueHeader)"/>
+      <text class="small-title" x="416" y="300" text-anchor="middle">Review agent</text>
+      <use href="#checkItem" x="322" y="318" width="16" height="16"/>
+      <use href="#checkItem" x="322" y="343" width="16" height="16"/>
+      <use href="#checkItem" x="322" y="368" width="16" height="16"/>
+      <use href="#checkItem" x="322" y="393" width="16" height="16"/>
+      <text class="body-sm">
+        <tspan x="345" y="331">Panel labels &amp; completeness</tspan>
+        <tspan x="345" y="356">Axes, ticks, labels, legends</tspan>
+        <tspan x="345" y="381">Boundaries &amp; no leakage</tspan>
+        <tspan x="345" y="406">Legends, titles, colorbars</tspan>
+      </text>
+      <text class="body">
+        <tspan x="313" y="449">Propose crops and review panel</tspan>
+        <tspan x="313" y="470">quality. Output panel images and</tspan>
+        <tspan x="313" y="491">metadata linked to the source.</tspan>
+      </text>
+    </g>
+
+    <!-- Step 3 -->
+    <g id="step3">
+      <circle cx="577" cy="90" r="17" fill="#28733d"/>
+      <text class="white bold" x="577" y="99" font-size="26" text-anchor="middle">3</text>
+      <text class="step-title" text-anchor="middle">
+        <tspan x="700" y="89">Qwen classification &amp;</tspan>
+        <tspan x="700" y="111">quality scoring</tspan>
+      </text>
+      <g transform="translate(567 144)">
+        <path d="M20 0l11 7-6 10 12 1 4 12-12 6 6 10-11 8-9-9-8 9-11-8 6-10-12-6 4-12 12-1-6-10 11-7 9 9z" fill="#7665ff" opacity=".95"/>
+        <path d="M11 16h18M8 28h26M15 41h14" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <text x="613" y="169" font-size="18" font-weight="700" fill="#0d1b7e">Qwen-VL</text>
+      <path d="M696 162h19" stroke="#111111" stroke-width="1.7" marker-end="url(#smallArrow)"/>
+      <use href="#clipboardIcon" x="729" y="136" width="48" height="58"/>
+
+      <rect x="558" y="212" width="226" height="176" rx="5" fill="#ffffff" stroke="#9bbfa7"/>
+      <text class="body-sm">
+        <tspan x="568" y="244">clarity_integrity_score</tspan>
+        <tspan x="568" y="274">data_purity_score</tspan>
+        <tspan x="568" y="304">code_reproducibility_score</tspan>
+        <tspan x="568" y="334">aesthetic_score</tspan>
+        <tspan x="568" y="364">overall_quality_score</tspan>
+      </text>
+      <g class="bold" font-size="14" text-anchor="middle">
+        <rect x="729" y="226" width="47" height="26" rx="4" fill="#cdebbb"/>
+        <rect x="729" y="256" width="47" height="26" rx="4" fill="#cdebbb"/>
+        <rect x="729" y="286" width="47" height="26" rx="4" fill="#cdebbb"/>
+        <rect x="729" y="316" width="47" height="26" rx="4" fill="#cdebbb"/>
+        <rect x="729" y="346" width="47" height="26" rx="4" fill="#cdebbb"/>
+        <text x="752" y="244">7-10</text>
+        <text x="752" y="274">10</text>
+        <text x="752" y="304">9-10</text>
+        <text x="752" y="334">8-10</text>
+        <text x="752" y="364">7-10</text>
+      </g>
+
+      <rect x="558" y="397" width="226" height="26" rx="4" fill="#c6dfa9" stroke="#9abc7e"/>
+      <path d="M566 404h15l-6 8v6h-3v-6z" fill="#4f7f3e" stroke="#4f7f3e"/>
+      <text class="body-sm bold" x="586" y="416" font-size="11">Filter: data_statistical &amp; pass gates</text>
+      <text class="body">
+        <tspan x="558" y="449">Identify subtype and assign 0-10</tspan>
+        <tspan x="558" y="470">quality metrics. Only high-quality</tspan>
+        <tspan x="558" y="491">statistical/data panels proceed.</tspan>
+      </text>
+    </g>
+
+    <!-- Step 4 -->
+    <g id="step4">
+      <circle cx="847" cy="90" r="17" fill="#5d428f"/>
+      <text class="white bold" x="847" y="99" font-size="26" text-anchor="middle">4</text>
+      <text class="step-title" text-anchor="middle">
+        <tspan x="940" y="89">Code reproduce</tspan>
+        <tspan x="940" y="111">agent loop</tspan>
+      </text>
+
+      <rect class="inner-card" x="825" y="136" width="207" height="139" rx="5" stroke="#8d6cb1"/>
+      <path d="M830 136h197a5 5 0 0 1 5 5v20H825v-20a5 5 0 0 1 5-5z" fill="url(#purpleHeader)"/>
+      <text class="white small-title" x="929" y="153" text-anchor="middle">Codex code agent</text>
+      <rect x="836" y="170" width="79" height="100" fill="#050505" stroke="#222"/>
+      <g font-size="3.5" font-family="Menlo, Consolas, monospace">
+        <text x="843" y="183" fill="#50e3c2">import numpy as np</text>
+        <text x="843" y="191" fill="#8bd5ff">fig, ax = plt.subplots()</text>
+        <text x="843" y="199" fill="#ffffff">x = data["x"]</text>
+        <text x="843" y="207" fill="#ffcc66">ax.scatter(x, y)</text>
+        <text x="843" y="215" fill="#ffffff">ax.plot(fit)</text>
+        <text x="843" y="223" fill="#8bd5ff">ax.set_xlabel("X")</text>
+        <text x="843" y="231" fill="#8bd5ff">ax.set_ylabel("Y")</text>
+        <text x="843" y="239" fill="#50e3c2">plt.savefig(out)</text>
+      </g>
+      <g transform="translate(925 170)">
+        <rect x="0" y="0" width="96" height="100" fill="#ffffff" stroke="#cbd5e1"/>
+        <path class="mini-axis" d="M12 86h74M12 86v-72"/>
+        <path d="M16 78L84 21" stroke="#4b5563" stroke-width="1.2"/>
+        <g fill="#ef2222">
+          <circle cx="28" cy="67" r="2"/><circle cx="35" cy="52" r="2"/><circle cx="42" cy="63" r="2"/><circle cx="50" cy="48" r="2"/><circle cx="55" cy="38" r="2"/><circle cx="63" cy="45" r="2"/><circle cx="70" cy="30" r="2"/><circle cx="78" cy="25" r="2"/>
+        </g>
+        <g fill="#1261c7">
+          <circle cx="20" cy="79" r="2"/><circle cx="25" cy="75" r="2"/><circle cx="32" cy="72" r="2"/><circle cx="39" cy="66" r="2"/><circle cx="46" cy="59" r="2"/><circle cx="53" cy="61" r="2"/><circle cx="61" cy="50" r="2"/><circle cx="83" cy="15" r="2"/>
+        </g>
+        <text class="tiny" x="52" y="96">X</text>
+        <text class="tiny" x="2" y="45">Y</text>
+      </g>
+
+      <rect class="inner-card" x="825" y="283" width="207" height="142" rx="5" stroke="#8d6cb1"/>
+      <path d="M830 283h197a5 5 0 0 1 5 5v20H825v-20a5 5 0 0 1 5-5z" fill="url(#purpleHeader)"/>
+      <text class="white small-title" x="929" y="300" text-anchor="middle">Codex review agent</text>
+      <use href="#checkItem" x="837" y="318" width="16" height="16"/>
+      <use href="#checkItem" x="837" y="343" width="16" height="16"/>
+      <use href="#checkItem" x="837" y="368" width="16" height="16"/>
+      <use href="#checkItem" x="837" y="393" width="16" height="16"/>
+      <text class="body-sm">
+        <tspan x="860" y="331">Chart type &amp; data pattern</tspan>
+        <tspan x="860" y="356">Axes, ticks, labels, legends</tspan>
+        <tspan x="860" y="381">Layout, colors, annotations</tspan>
+        <tspan x="860" y="406">Collisions &amp; edge visibility</tspan>
+      </text>
+      <text class="body">
+        <tspan x="825" y="449">Write code, render output, and</tspan>
+        <tspan x="825" y="470">review against the target. Iterate</tspan>
+        <tspan x="825" y="491">until the result is faithful.</tspan>
+      </text>
+    </g>
+
+    <!-- Step 5 -->
+    <g id="step5">
+      <circle cx="1094" cy="90" r="17" fill="#5d428f"/>
+      <text class="white bold" x="1094" y="99" font-size="26" text-anchor="middle">5</text>
+      <text class="step-title" text-anchor="middle">
+        <tspan x="1167" y="89">Final refine</tspan>
+        <tspan x="1167" y="111">agent loop</tspan>
+      </text>
+
+      <rect class="inner-card" x="1073" y="136" width="190" height="160" rx="5" stroke="#8d6cb1"/>
+      <g transform="translate(1092 169)">
+        <path class="axis-line" d="M0 107h126M0 107v-101"/>
+        <path d="M14 94C43 69 62 60 87 38c16-14 30-23 40-27" fill="none" stroke="#444444" stroke-width="1.2"/>
+        <g fill="#ef2222">
+          <circle cx="52" cy="67" r="2.2"/><circle cx="60" cy="57" r="2.2"/><circle cx="66" cy="72" r="2.2"/><circle cx="75" cy="55" r="2.2"/><circle cx="84" cy="45" r="2.2"/><circle cx="93" cy="50" r="2.2"/><circle cx="103" cy="32" r="2.2"/>
+        </g>
+        <g fill="#1261c7">
+          <circle cx="18" cy="91" r="2.2"/><circle cx="27" cy="84" r="2.2"/><circle cx="36" cy="75" r="2.2"/><circle cx="46" cy="80" r="2.2"/><circle cx="56" cy="70" r="2.2"/><circle cx="70" cy="63" r="2.2"/><circle cx="88" cy="42" r="2.2"/><circle cx="108" cy="15" r="2.2"/>
+        </g>
+        <text class="axis" x="73" y="125">X</text>
+        <text class="axis" x="-15" y="57">Y</text>
+        <text class="body-sm" x="128" y="14">Group</text>
+        <circle cx="132" cy="28" r="3" fill="#ef2222"/><text class="body-sm" x="140" y="32">A</text>
+        <circle cx="132" cy="45" r="3" fill="#1261c7"/><text class="body-sm" x="140" y="49">B</text>
+      </g>
+
+      <rect class="inner-card" x="1073" y="297" width="190" height="128" rx="5" stroke="#8d6cb1"/>
+      <path d="M1078 297h180a5 5 0 0 1 5 5v20h-190v-20a5 5 0 0 1 5-5z" fill="url(#purpleHeader)"/>
+      <text class="white small-title" x="1168" y="314" text-anchor="middle">Audit agent</text>
+      <use href="#checkItem" x="1084" y="333" width="16" height="16"/>
+      <use href="#checkItem" x="1084" y="356" width="16" height="16"/>
+      <use href="#checkItem" x="1084" y="379" width="16" height="16"/>
+      <use href="#checkItem" x="1084" y="402" width="16" height="16"/>
+      <text class="body-sm">
+        <tspan x="1106" y="346">Typography &amp; Arial font</tspan>
+        <tspan x="1106" y="369">Hierarchy &amp; compactness</tspan>
+        <tspan x="1106" y="392">Overlap &amp; clipping</tspan>
+        <tspan x="1106" y="415">Symbols &amp; insets</tspan>
+      </text>
+      <text class="body">
+        <tspan x="1072" y="449">Polish code for typography and</tspan>
+        <tspan x="1072" y="470">layout. Assess refine complexity</tspan>
+        <tspan x="1072" y="491">and summarize content.</tspan>
+      </text>
+    </g>
+
+    <!-- Step 6 -->
+    <g id="step6">
+      <circle cx="1318" cy="90" r="17" fill="#ef7b00"/>
+      <text class="white bold" x="1318" y="99" font-size="26" text-anchor="middle">6</text>
+      <text class="step-title" text-anchor="middle">
+        <tspan x="1418" y="89">Gallery export &amp;</tspan>
+        <tspan x="1418" y="111">benchmark record</tspan>
+      </text>
+
+      <rect x="1298" y="136" width="213" height="289" rx="5" fill="#fffaf4" stroke="#f07b00"/>
+      <path d="M1303 136h203a5 5 0 0 1 5 5v20h-213v-20a5 5 0 0 1 5-5z" fill="url(#orangeHeader)"/>
+      <text class="white small-title" x="1404" y="153" text-anchor="middle">Benchmark record</text>
+      <use href="#paperIcon" x="1312" y="172" width="22" height="27"/>
+      <use href="#paperIcon" x="1312" y="210" width="22" height="27"/>
+      <use href="#photoIcon" x="1311" y="248" width="25" height="20"/>
+      <use href="#codeIcon" x="1311" y="278" width="25" height="19"/>
+      <use href="#gearIcon" x="1311" y="311" width="25" height="22"/>
+      <path d="M1315 351l5-5m0 0l5 5m-5-5v14M1332 346l-5 5m0 0l-5-5m5 5v-14" fill="none" stroke="#111111" stroke-width="1.4"/>
+      <use href="#gaugeIcon" x="1310" y="367" width="27" height="20"/>
+      <use href="#speechIcon" x="1311" y="397" width="26" height="20"/>
+      <text class="body-sm">
+        <tspan x="1345" y="190">Metadata &amp; caption</tspan>
+        <tspan x="1345" y="228">Target image</tspan>
+        <tspan x="1345" y="260">Reproduced &amp; refined images</tspan>
+        <tspan x="1345" y="292">Executable Python code</tspan>
+        <tspan x="1345" y="324">Qwen scores</tspan>
+        <tspan x="1345" y="356">Codex reviews</tspan>
+        <tspan x="1345" y="388">Refine complexity score</tspan>
+        <tspan x="1345" y="413">Caption-based summary</tspan>
+      </text>
+      <text class="body">
+        <tspan x="1298" y="449">Export accepted panels with all</tspan>
+        <tspan x="1298" y="470">artifacts for inspection and</tspan>
+        <tspan x="1298" y="491">benchmarking.</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- Dataset section -->
+  <line x1="1" y1="530" x2="1535" y2="530" stroke="#9ca3af"/>
+  <text x="18" y="556" font-size="20" font-weight="700">Current dataset snapshot</text>
+
+  <g id="dataset">
+    <rect class="card" x="17" y="564" width="362" height="354" rx="7" stroke="#b5c4da"/>
+    <rect class="card" x="391" y="564" width="348" height="354" rx="7" stroke="#b5c4da"/>
+    <rect class="card" x="751" y="564" width="352" height="354" rx="7" stroke="#b5c4da"/>
+    <rect class="card" x="1115" y="564" width="405" height="354" rx="7" stroke="#b5c4da"/>
+
+    <!-- Domain donut and table -->
+    <g id="domain-size">
+      <text class="small-title" x="34" y="586">Dataset size by domain (8,385 panels)</text>
+      <g transform="translate(105 664)">
+        <path d="M0,-72 A72,72 0 0,1 42.9,-57.8 L29.8,-40.1 A50,50 0 0,0 0,-50 Z" fill="#2f67b2"/>
+        <path d="M42.9,-57.8 A72,72 0 0,1 36.1,62.3 L25.1,43.3 A50,50 0 0,0 29.8,-40.1 Z" fill="#5aa86b"/>
+        <path d="M36.1,62.3 A72,72 0 0,1 -70.2,-16.1 L-48.8,-11.2 A50,50 0 0,0 25.1,43.3 Z" fill="#64479a"/>
+        <path d="M-70.2,-16.1 A72,72 0 0,1 -47.5,-54.1 L-33,-37.6 A50,50 0 0,0 -48.8,-11.2 Z" fill="#f0a13a"/>
+        <path d="M-47.5,-54.1 A72,72 0 0,1 0,-72 L0,-50 A50,50 0 0,0 -33,-37.6 Z" fill="#8595c2"/>
+        <circle cx="0" cy="0" r="50" fill="#ffffff"/>
+        <text x="0" y="3" font-size="24" font-weight="700" text-anchor="middle">8,385</text>
+        <text x="0" y="25" font-size="16" font-weight="700" text-anchor="middle">panels</text>
+      </g>
+      <g transform="translate(198 608)">
+        <rect x="0" y="0" width="13" height="13" fill="#2f67b2"/><text class="body-sm" x="23" y="11">Biology</text><text class="body-sm" x="105" y="11">836 (10.0%)</text>
+        <rect x="0" y="27" width="13" height="13" fill="#5aa86b"/><text class="body-sm" x="23" y="38">Environment</text><text class="body-sm" x="105" y="38">3,831 (45.7%)</text>
+        <rect x="0" y="54" width="13" height="13" fill="#64479a"/><text class="body-sm" x="23" y="65">Geography</text><text class="body-sm" x="105" y="65">2,688 (32.1%)</text>
+        <rect x="0" y="81" width="13" height="13" fill="#f0a13a"/><text class="body-sm" x="23" y="92">Materials</text><text class="body-sm" x="105" y="92">441 (5.3%)</text>
+        <rect x="0" y="108" width="13" height="13" fill="#8595c2"/><text class="body-sm" x="23" y="119">Physics</text><text class="body-sm" x="105" y="119">589 (7.0%)</text>
+      </g>
+      <g transform="translate(22 744)">
+        <rect x="0" y="0" width="354" height="144" fill="#ffffff" stroke="#9ca3af"/>
+        <rect x="0" y="0" width="354" height="24" fill="#eef2f7"/>
+        <g stroke="#9ca3af" stroke-width=".7">
+          <path d="M0 24h354M0 48h354M0 72h354M0 96h354M0 120h354"/>
+          <path d="M67 0v144M135 0v144M204 0v144M272 0v144M316 0v144"/>
+        </g>
+        <g font-size="8" font-weight="700" text-anchor="middle">
+          <text x="33" y="16">Domain</text>
+          <text x="101" y="16">Review passed</text>
+          <text x="170" y="16">Qwen scored</text>
+          <text x="238" y="16">Complexity scored</text>
+          <text x="294" y="16">Journals</text>
+          <text x="335" y="16">Subtypes</text>
+        </g>
+        <g class="tiny">
+          <text x="6" y="40">Biology</text><text x="100" y="40" text-anchor="middle">787</text><text x="170" y="40" text-anchor="middle">836</text><text x="238" y="40" text-anchor="middle">833</text><text x="294" y="40" text-anchor="middle">15</text><text x="335" y="40" text-anchor="middle">30</text>
+          <text x="6" y="64">Environment</text><text x="100" y="64" text-anchor="middle">3,831</text><text x="170" y="64" text-anchor="middle">3,831</text><text x="238" y="64" text-anchor="middle">3,831</text><text x="294" y="64" text-anchor="middle">18</text><text x="335" y="64" text-anchor="middle">29</text>
+          <text x="6" y="88">Geography</text><text x="100" y="88" text-anchor="middle">2,688</text><text x="170" y="88" text-anchor="middle">2,688</text><text x="238" y="88" text-anchor="middle">2,688</text><text x="294" y="88" text-anchor="middle">15</text><text x="335" y="88" text-anchor="middle">28</text>
+          <text x="6" y="112">Materials</text><text x="100" y="112" text-anchor="middle">433</text><text x="170" y="112" text-anchor="middle">441</text><text x="238" y="112" text-anchor="middle">441</text><text x="294" y="112" text-anchor="middle">10</text><text x="335" y="112" text-anchor="middle">26</text>
+          <text x="6" y="136">Physics</text><text x="100" y="136" text-anchor="middle">589</text><text x="170" y="136" text-anchor="middle">589</text><text x="238" y="136" text-anchor="middle">589</text><text x="294" y="136" text-anchor="middle">11</text><text x="335" y="136" text-anchor="middle">28</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Top chart subtypes -->
+    <g id="subtypes">
+      <text class="small-title" x="565" y="583" text-anchor="middle">Top chart subtypes</text>
+      <g transform="translate(493 602)">
+        <path class="axis-line" d="M0 210h211"/>
+        <g stroke="#dbe2ea" stroke-width="1">
+          <path d="M0 0v210M70 0v210M141 0v210M211 0v210"/>
+        </g>
+        <g class="axis" text-anchor="middle">
+          <text x="0" y="231">0</text>
+          <text x="70" y="231">500</text>
+          <text x="141" y="231">1,000</text>
+          <text x="211" y="231">1,500</text>
+          <text x="105" y="253">Count</text>
+        </g>
+        <g class="body-sm" text-anchor="end">
+          <text x="-10" y="10">multi_line</text>
+          <text x="-10" y="33">grouped_bar</text>
+          <text x="-10" y="56">scatter</text>
+          <text x="-10" y="79">heatmap</text>
+          <text x="-10" y="102">bar</text>
+          <text x="-10" y="125">box</text>
+          <text x="-10" y="148">scatter_with_fit</text>
+          <text x="-10" y="171">dot_plot</text>
+          <text x="-10" y="194">time_series</text>
+          <text x="-10" y="217">other_data_display</text>
+        </g>
+        <g fill="#2f67b2">
+          <rect x="0" y="0" width="189" height="12"/><rect x="0" y="23" width="112" height="12"/><rect x="0" y="46" width="102" height="12"/><rect x="0" y="69" width="101" height="12"/><rect x="0" y="92" width="91" height="12"/><rect x="0" y="115" width="90" height="12"/><rect x="0" y="138" width="68" height="12"/><rect x="0" y="161" width="51" height="12"/><rect x="0" y="184" width="43" height="12"/><rect x="0" y="207" width="42" height="12"/>
+        </g>
+        <g class="body-sm">
+          <text x="195" y="11">1,340</text>
+          <text x="118" y="34">798</text>
+          <text x="108" y="57">727</text>
+          <text x="107" y="80">716</text>
+          <text x="97" y="103">647</text>
+          <text x="96" y="126">637</text>
+          <text x="74" y="149">483</text>
+          <text x="57" y="172">363</text>
+          <text x="49" y="195">309</text>
+          <text x="48" y="218">296</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Qwen score distribution -->
+    <g id="qwen-dist">
+      <text class="small-title" x="927" y="583" text-anchor="middle">Qwen overall_quality_score distribution</text>
+      <text class="body-sm" x="797" y="605">Mean 9.005  |  Median 9.0  |  Min 7.0  |  Max 10.0</text>
+      <g transform="translate(813 622)">
+        <path class="axis-line" d="M0 180h260M0 180v-180"/>
+        <g class="grid">
+          <path d="M0 180h260M0 135h260M0 90h260M0 45h260M0 0h260"/>
+        </g>
+        <g class="axis" text-anchor="end">
+          <text x="-8" y="184">1</text>
+          <text x="-8" y="139">10</text>
+          <text x="-8" y="94">100</text>
+          <text x="-8" y="49">1,000</text>
+          <text x="-8" y="5">10,000</text>
+        </g>
+        <g fill="#2f67b2" opacity=".95">
+          <rect x="14" y="166.5" width="31" height="13.5"/>
+          <rect x="66" y="104.4" width="31" height="75.6"/>
+          <rect x="118" y="4.0" width="31" height="176.0"/>
+          <rect x="170" y="139.4" width="31" height="40.6"/>
+          <rect x="222" y="92.3" width="31" height="87.7"/>
+        </g>
+        <g class="body-sm" text-anchor="middle">
+          <text x="29.5" y="154">2</text>
+          <text x="81.5" y="96">48</text>
+          <text x="133.5" y="-8">8,238</text>
+          <text x="185.5" y="130">8</text>
+          <text x="237.5" y="83">89</text>
+        </g>
+        <g class="axis" text-anchor="middle">
+          <text x="29.5" y="202">7</text>
+          <text x="81.5" y="202">8</text>
+          <text x="133.5" y="202">9</text>
+          <text x="185.5" y="202">9.5</text>
+          <text x="237.5" y="202">10</text>
+          <text x="130" y="222">overall_quality_score</text>
+        </g>
+        <text class="axis" transform="translate(-46 103) rotate(-90)">Count</text>
+      </g>
+      <rect x="763" y="855" width="329" height="55" rx="5" fill="#f9fafb" stroke="#c3c9d1"/>
+      <text class="caption">
+        <tspan x="781" y="877">All panels are classified as</tspan>
+        <tspan x="781" y="898" class="bold italic">data_statistical</tspan><tspan class="bold"> with data_purity_score = 10.</tspan>
+      </text>
+    </g>
+
+    <!-- Codex complexity distribution -->
+    <g id="complexity-dist">
+      <text class="small-title" x="1316" y="583" text-anchor="middle">Codex refine_complexity_score distribution</text>
+      <text class="body-sm" x="1181" y="605">Mean 4.084  |  Median 4.0  |  Min 1.0  |  Max 8.0</text>
+      <g transform="translate(1174 622)">
+        <path class="axis-line" d="M0 180h333M0 180v-180"/>
+        <g class="grid">
+          <path d="M0 180h333M0 135h333M0 90h333M0 45h333M0 0h333"/>
+        </g>
+        <g class="axis" text-anchor="end">
+          <text x="-8" y="184">1</text>
+          <text x="-8" y="139">10</text>
+          <text x="-8" y="94">100</text>
+          <text x="-8" y="49">1,000</text>
+          <text x="-8" y="5">10,000</text>
+        </g>
+        <g fill="#64479a" opacity=".95">
+          <rect x="19" y="139.4" width="13" height="40.6"/>
+          <rect x="43" y="66.9" width="13" height="113.1"/>
+          <rect x="67" y="33.2" width="13" height="146.8"/>
+          <rect x="91" y="16.6" width="13" height="163.4"/>
+          <rect x="115" y="153.0" width="13" height="27.0"/>
+          <rect x="139" y="148.5" width="13" height="31.5"/>
+          <rect x="163" y="166.5" width="13" height="13.5"/>
+          <rect x="187" y="158.5" width="13" height="21.5"/>
+          <rect x="211" y="48.4" width="13" height="131.6"/>
+          <rect x="235" y="45.3" width="13" height="134.7"/>
+          <rect x="259" y="148.5" width="13" height="31.5"/>
+          <rect x="283" y="180" width="13" height="0"/>
+          <rect x="307" y="90.8" width="13" height="89.2"/>
+          <rect x="331" y="124.6" width="13" height="55.4"/>
+        </g>
+        <g class="body-sm" text-anchor="middle">
+          <text x="25.5" y="131">8</text><text x="49.5" y="58">326</text><text x="73.5" y="25">1,822</text><text x="97.5" y="8">4,263</text>
+          <text x="121.5" y="145">4</text><text x="145.5" y="140">5</text><text x="169.5" y="158">2</text><text x="193.5" y="150">3</text>
+          <text x="217.5" y="40">837</text><text x="241.5" y="37">992</text><text x="265.5" y="140">5</text><text x="289.5" y="171">1</text>
+          <text x="313.5" y="82">96</text><text x="337.5" y="116">17</text>
+        </g>
+        <g class="axis" text-anchor="middle">
+          <text x="25.5" y="202">1</text><text x="49.5" y="202">2</text><text x="73.5" y="202">3</text><text x="97.5" y="202">4</text>
+          <text x="121.5" y="202">4.2</text><text x="145.5" y="202">4.5</text><text x="169.5" y="202">4.6</text><text x="193.5" y="202">4.8</text>
+          <text x="217.5" y="202">5</text><text x="241.5" y="202">6</text><text x="265.5" y="202">6.5</text><text x="289.5" y="202">6.6</text><text x="313.5" y="202">7</text><text x="337.5" y="202">8</text>
+          <text x="166" y="222">refine_complexity_score</text>
+        </g>
+        <text class="axis" transform="translate(-46 103) rotate(-90)">Count</text>
+      </g>
+      <rect x="1127" y="855" width="383" height="55" rx="5" fill="#f9fafb" stroke="#c3c9d1"/>
+      <text class="caption">
+        <tspan x="1146" y="877">Score reflects code-reproduction and final-polish</tspan>
+        <tspan x="1146" y="898">difficulty (not generic image complexity).</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- Footer legend -->
+  <rect class="card" x="16" y="935" width="1504" height="75" rx="7" stroke="#b5c4da"/>
+  <g id="footer">
+    <use href="#paperIcon" x="84" y="949" width="42" height="50"/>
+    <text class="caption">
+      <tspan x="134" y="969">Traceable to DOI,</tspan>
+      <tspan x="134" y="991">paper, figure &amp; caption</tspan>
+    </text>
+
+    <use href="#codeIcon" x="354" y="950" width="52" height="39"/>
+    <text class="caption">
+      <tspan x="421" y="969">Executable Python</tspan>
+      <tspan x="421" y="991">code (editable)</tspan>
+    </text>
+
+    <use href="#magnifyIcon" x="649" y="947" width="55" height="50"/>
+    <text class="caption">
+      <tspan x="708" y="969">Agentic review</tspan>
+      <tspan x="708" y="991">at every stage</tspan>
+    </text>
+
+    <use href="#gaugeIcon" x="882" y="953" width="57" height="41"/>
+    <text class="caption">
+      <tspan x="952" y="969">Complexity score for</tspan>
+      <tspan x="952" y="991">benchmark stratification</tspan>
+    </text>
+
+    <use href="#speechIcon" x="1174" y="955" width="55" height="40"/>
+    <text class="caption">
+      <tspan x="1240" y="969">Caption-based content</tspan>
+      <tspan x="1240" y="991">summary preserved</tspan>
+    </text>
+  </g>
+</svg>

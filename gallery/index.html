@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="SciFigureHub gallery of reviewed scientific figure reproductions across disciplines. Search, filter, and inspect target versus reproduced panels with journal provenance.">
+    <meta name="theme-color" content="#f7fbff">
+    <title>SciFigureHub Gallery</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/styles.css?v=20260521-paged2">
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="masthead">
+        <a class="brand" href="#/" aria-label="SciFigureHub gallery home">
+          <span class="brand-mark">SFH</span>
+          <span>
+            <strong>SciFigureHub</strong>
+            <small data-i18n="brandTag">Scientific Figure Gallery</small>
+          </span>
+        </a>
+        <nav class="top-nav" aria-label="Primary">
+          <a href="#/" data-i18n="navHome">Home</a>
+          <a href="#/category/all" data-i18n="navCatalog">Catalog</a>
+          <a href="#/category/dose_response" data-i18n="navFeatured">Featured subtype</a>
+          <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">中文</button>
+        </nav>
+      </header>
+
+      <main id="app" class="app" tabindex="-1">
+        <section class="loading-state">
+          <p class="eyebrow" data-i18n="loadingEyebrow">Loading catalog</p>
+          <h1 data-i18n="loadingTitle">Reading normalized panel evidence.</h1>
+        </section>
+      </main>
+
+      <noscript>
+        <section class="empty-state">
+          <p class="eyebrow">JavaScript required</p>
+          <h1>This gallery needs JavaScript to read the generated catalog.</h1>
+        </section>
+      </noscript>
+    </div>
+
+    <template id="card-template">
+      <article class="panel-card">
+        <a class="card-media" data-field="detailLink">
+          <img data-field="target" alt="" loading="lazy">
+          <img data-field="reproduce" alt="" loading="lazy">
+        </a>
+        <div class="card-body">
+          <div class="card-meta">
+            <a data-field="subtypeLink" class="pill"></a>
+            <span data-field="date"></span>
+          </div>
+          <h3><a data-field="titleLink"></a></h3>
+          <p data-field="caption"></p>
+          <div class="score-strip" aria-label="Scores">
+            <span><b data-field="quality"></b> <span data-field="qualityLabel">Quality</span></span>
+            <span><b data-field="complexity"></b> <span data-field="complexityLabel">Complexity</span></span>
+            <span><b data-field="review"></b> <span data-field="reviewLabel">Review</span></span>
+            <span><b data-field="rounds"></b> <span data-field="roundsLabel">Rounds</span></span>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="assets/app.js?v=20260524-materials-score-complexity" defer></script>
+  </body>
+</html>

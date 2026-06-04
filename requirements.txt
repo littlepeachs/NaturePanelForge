@@ -1,0 +1,19 @@
+beautifulsoup4>=4.12
+lxml>=5.0
+matplotlib>=3.8
+numpy>=1.24
+pandas>=2.0
+pillow>=10.0
+requests>=2.31
+tqdm>=4.66
+
+# Optional but recommended for local Qwen scoring.
+accelerate>=0.34
+safetensors>=0.4
+torch>=2.3
+torchvision>=0.18
+transformers>=4.57
+
+# Optional for PDF/image utilities.
+pypdf>=4.0
+pdf2image>=1.17

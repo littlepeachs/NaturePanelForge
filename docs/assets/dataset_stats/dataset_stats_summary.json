@@ -1,0 +1,298 @@
+{
+  "generated_at": "2026-06-04T13:07:08.171338+00:00",
+  "total_panels": 8385,
+  "subjects": [
+    {
+      "subject": "biology",
+      "panels": 836,
+      "review_passed": 787,
+      "qwen_available": 836,
+      "complexity_available": 833,
+      "unique_journals": 15,
+      "chart_subtypes": 30
+    },
+    {
+      "subject": "environment",
+      "panels": 3831,
+      "review_passed": 3831,
+      "qwen_available": 3831,
+      "complexity_available": 3831,
+      "unique_journals": 18,
+      "chart_subtypes": 29
+    },
+    {
+      "subject": "geography",
+      "panels": 2688,
+      "review_passed": 2688,
+      "qwen_available": 2688,
+      "complexity_available": 2688,
+      "unique_journals": 15,
+      "chart_subtypes": 28
+    },
+    {
+      "subject": "materials",
+      "panels": 441,
+      "review_passed": 433,
+      "qwen_available": 441,
+      "complexity_available": 441,
+      "unique_journals": 10,
+      "chart_subtypes": 26
+    },
+    {
+      "subject": "physics",
+      "panels": 589,
+      "review_passed": 589,
+      "qwen_available": 589,
+      "complexity_available": 589,
+      "unique_journals": 11,
+      "chart_subtypes": 28
+    }
+  ],
+  "qwen": {
+    "fields": [
+      "clarity_integrity_score",
+      "data_purity_score",
+      "code_reproducibility_score",
+      "aesthetic_score",
+      "overall_quality_score"
+    ],
+    "overall_quality_summary": {
+      "count": 8385,
+      "mean": 9.005,
+      "min": 7.0,
+      "p25": 9.0,
+      "median": 9.0,
+      "p75": 9.0,
+      "max": 10.0
+    },
+    "distributions": {
+      "clarity_integrity_score": [
+        {
+          "value": "7",
+          "count": 2
+        },
+        {
+          "value": "8",
+          "count": 48
+        },
+        {
+          "value": "9",
+          "count": 98
+        },
+        {
+          "value": "10",
+          "count": 8237
+        }
+      ],
+      "data_purity_score": [
+        {
+          "value": "10",
+          "count": 8385
+        }
+      ],
+      "code_reproducibility_score": [
+        {
+          "value": "9",
+          "count": 8292
+        },
+        {
+          "value": "10",
+          "count": 93
+        }
+      ],
+      "aesthetic_score": [
+        {
+          "value": "8",
+          "count": 4320
+        },
+        {
+          "value": "9",
+          "count": 4065
+        }
+      ],
+      "overall_quality_score": [
+        {
+          "value": "7",
+          "count": 2
+        },
+        {
+          "value": "8",
+          "count": 48
+        },
+        {
+          "value": "9",
+          "count": 8238
+        },
+        {
+          "value": "9.5",
+          "count": 8
+        },
+        {
+          "value": "10",
+          "count": 89
+        }
+      ]
+    }
+  },
+  "codex_refine_complexity": {
+    "summary": {
+      "count": 8382,
+      "mean": 4.084,
+      "min": 1.0,
+      "p25": 3.0,
+      "median": 4.0,
+      "p75": 4.0,
+      "max": 8.0
+    },
+    "distribution": [
+      {
+        "value": "1",
+        "count": 8
+      },
+      {
+        "value": "2",
+        "count": 326
+      },
+      {
+        "value": "3",
+        "count": 1822
+      },
+      {
+        "value": "4",
+        "count": 4263
+      },
+      {
+        "value": "4.2",
+        "count": 4
+      },
+      {
+        "value": "4.5",
+        "count": 5
+      },
+      {
+        "value": "4.6",
+        "count": 2
+      },
+      {
+        "value": "4.8",
+        "count": 3
+      },
+      {
+        "value": "5",
+        "count": 837
+      },
+      {
+        "value": "6",
+        "count": 992
+      },
+      {
+        "value": "6.4",
+        "count": 1
+      },
+      {
+        "value": "6.5",
+        "count": 5
+      },
+      {
+        "value": "6.6",
+        "count": 1
+      },
+      {
+        "value": "7",
+        "count": 96
+      },
+      {
+        "value": "8",
+        "count": 17
+      }
+    ]
+  },
+  "qwen_categories": [
+    {
+      "value": "data_statistical",
+      "count": 8385
+    }
+  ],
+  "chart_subtypes_top20": [
+    [
+      "multi_line",
+      1340
+    ],
+    [
+      "grouped_bar",
+      798
+    ],
+    [
+      "scatter",
+      727
+    ],
+    [
+      "heatmap",
+      716
+    ],
+    [
+      "bar",
+      647
+    ],
+    [
+      "box",
+      637
+    ],
+    [
+      "scatter_with_fit",
+      487
+    ],
+    [
+      "dot_plot",
+      363
+    ],
+    [
+      "time_series",
+      309
+    ],
+    [
+      "other_data_display",
+      296
+    ],
+    [
+      "umap_tsne_pca",
+      252
+    ],
+    [
+      "geospatial_map",
+      242
+    ],
+    [
+      "line",
+      235
+    ],
+    [
+      "stacked_bar",
+      234
+    ],
+    [
+      "violin",
+      213
+    ],
+    [
+      "histogram",
+      190
+    ],
+    [
+      "volcano_plot",
+      114
+    ],
+    [
+      "density",
+      108
+    ],
+    [
+      "survival_curve",
+      92
+    ],
+    [
+      "dose_response",
+      87
+    ]
+  ]
+}

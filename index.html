@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="NaturePanelForge: scientific panel extraction and figure-to-code reconstruction workflow." />
+    <title>NaturePanelForge</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172033;
+        --muted: #53627a;
+        --line: #d9e3ef;
+        --blue: #2563eb;
+        --teal: #0d9488;
+        --bg: #f4f8fb;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--ink);
+        background: linear-gradient(135deg, #f8fbff 0%, #eef8f4 100%);
+      }
+      main {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 48px 20px;
+      }
+      .shell {
+        width: min(1040px, 100%);
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: clamp(28px, 5vw, 56px);
+        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+      }
+      .eyebrow {
+        margin: 0 0 12px;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        color: var(--blue);
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(42px, 7vw, 82px);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+      .lead {
+        margin: 24px 0 0;
+        max-width: 780px;
+        color: var(--muted);
+        font-size: clamp(18px, 2vw, 23px);
+        line-height: 1.45;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+      a {
+        color: inherit;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 20px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        text-decoration: none;
+        font-weight: 800;
+        background: #fff;
+      }
+      .button.primary {
+        border: 0;
+        color: #fff;
+        background: linear-gradient(90deg, var(--blue), var(--teal));
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 44px;
+      }
+      .card {
+        min-height: 132px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+      }
+      .card strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+      .card span {
+        color: var(--muted);
+        line-height: 1.42;
+      }
+      .note {
+        margin: 30px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      @media (max-width: 760px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="shell" aria-labelledby="title">
+        <p class="eyebrow">Scientific figure-to-code workflow</p>
+        <h1 id="title">NaturePanelForge</h1>
+        <p class="lead">
+          A code-first workflow for extracting Nature-level scientific figure panels,
+          reconstructing statistical panels as editable Python code, and inspecting
+          refined reproductions in a live gallery.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="http://166.111.35.177:18081/">Open Live Gallery</a>
+          <a class="button" href="https://github.com/littlepeachs/NaturePanelForge">GitHub Repository</a>
+          <a class="button" href="https://github.com/littlepeachs/NaturePanelForge/blob/main/docs/intro_and_methods.md">Intro and Methods</a>
+        </div>
+        <div class="grid" aria-label="Core workflow stages">
+          <div class="card">
+            <strong>Panel Split</strong>
+            <span>Convert compound full figures into reviewed, metadata-rich panel crops.</span>
+          </div>
+          <div class="card">
+            <strong>Code Reproduce</strong>
+            <span>Use a Codex write/review loop to render panels as Python, PNG, and PDF.</span>
+          </div>
+          <div class="card">
+            <strong>Final Refine</strong>
+            <span>Polish typography, overlaps, edge visibility, and scientific labels.</span>
+          </div>
+        </div>
+        <p class="note">
+          Large gallery images are served by the live gallery backend. This GitHub Pages
+          site only hosts the project landing page and documentation.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

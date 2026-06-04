@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#f7f0d9"/>
+  <rect x="6" y="6" width="52" height="52" fill="#fffaf0" stroke="#9f7a32" stroke-width="2"/>
+  <text x="32" y="39" text-anchor="middle" fill="#9f7a32" font-family="Georgia, serif" font-size="19" font-weight="700">SFH</text>
+</svg>

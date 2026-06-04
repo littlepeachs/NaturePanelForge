@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Local environments
+.venv/
+venv/
+env/
+.env
+*.env.local
+
+# Runtime outputs
+PipelineRuns/
+PipelineState/
+Final/
+PanelScores/
+PanelReviews*/
+Panels*/
+FullFigures/
+FigurePDFs/
+Figures/
+Papers/
+logs/
+runs/
+outputs/
+temp/
+tmp/
+UserRuns/
+*.log
+*.pid
+*.tmux
+
+# Gallery exports and generated catalog data
+gallery/site-data/
+gallery/biology/
+gallery/physics/
+gallery/materials/
+gallery/environment/
+gallery/geography/
+gallery/electronics/
+!gallery/assets/
+!gallery/assets/**
+!gallery/tools/
+!gallery/tools/**
+
+# Data, publisher assets, and generated figures
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.webp
+*.pdf
+*.svg
+!docs/assets/
+!docs/assets/**
+!gallery/assets/favicon.svg
+
+# Model weights and local caches
+models/
+.cache/
+.deps/
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.onnx
+*.gguf
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
