@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="48" viewBox="0 0 260 48" role="img" aria-labelledby="title desc">
+  <title id="title">Watch walkthrough video</title>
+  <desc id="desc">A play button linking to the NaturePanelForge walkthrough video.</desc>
+  <rect x="1" y="1" width="258" height="46" rx="8" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <circle cx="29" cy="24" r="13" fill="#f9fafb"/>
+  <path d="M25 17.5 L25 30.5 L36 24 Z" fill="#111827"/>
+  <text x="52" y="29" fill="#f9fafb" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Watch walkthrough video</text>
+</svg>

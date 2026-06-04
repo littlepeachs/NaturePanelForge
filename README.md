@@ -15,9 +15,9 @@ https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/
 
 The repository does not depend on this hosted demo.
 
-<video src="docs/assets/show_compressed.mp4" controls muted playsinline width="100%"></video>
+![NaturePanelForge gallery walkthrough](docs/assets/show_preview.gif)
 
-[Open the walkthrough video](docs/assets/show_compressed.mp4)
+[![Watch walkthrough video](docs/assets/watch_walkthrough_button.svg)](docs/assets/show_compressed.mp4)
 
 ![NaturePanelForge gallery home](docs/assets/nature_panel_forge_web1.png)
 
@@ -46,19 +46,29 @@ Target panels from real paper figures are shown beside Codex-rendered outputs. E
 
 ## Public Modes
 
-Use `forge.py` for the four public workflows. Each mode can be started with one command:
+Use `forge.py` for the four public workflows. Each mode can be started with one command.
+
+1. Single cropped panel image -> plotting code
 
 ```bash
-# 1. Single cropped panel image -> plotting code
 python3 forge.py single-panel-image --image /path/to/target_panel.png --panel-id demo_panel --chart-type bar --caption "A grouped bar chart with error bars and a legend." --out-root UserRuns/panel_demo --model gpt-5.4 --reasoning-effort medium --review-rounds 4 --skip-existing
+```
 
-# 2. Single full figure image -> reviewed panel crops
+2. Single full figure image -> reviewed panel crops
+
+```bash
 python3 forge.py single-full-image --image /path/to/full_figure.png --paper-id demo_paper --caption "A complete multi-panel scientific figure." --out-root UserRuns/full_demo --model gpt-5.4 --reasoning-effort medium --review-rounds 4 --skip-existing
+```
 
-# 3. Single paper -> paper metadata and full figures
+3. Single paper -> paper metadata and full figures
+
+```bash
 python3 forge.py single-paper --doi 10.1038/s41467-025-12345-6 --subject biology --topic AI_biology --figures-per-paper 5 --download-only
+```
 
-# 4. Batched papers -> full paper-to-panel-to-code workflow
+4. Batched papers -> full paper-to-panel-to-code workflow
+
+```bash
 python3 forge.py batched-paper --subject materials --topic AI_materials --target-papers 20 --batch-size 20 --figures-per-paper 5 --years 2024,2025,2026 --codex-model gpt-5.4 --codex-jobs 8
 ```
 
