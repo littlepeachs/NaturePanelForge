@@ -15,6 +15,8 @@ https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/
 
 The repository does not depend on this hosted demo.
 
+Walkthrough video: [NaturePanelForge gallery walkthrough](docs/assets/nature_panel_forge_gallery_walkthrough.webm)
+
 ![NaturePanelForge gallery home](docs/assets/nature_panel_forge_web1.png)
 
 ![NaturePanelForge gallery catalog](docs/assets/nature_panel_forge_web2.png)
