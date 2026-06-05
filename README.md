@@ -38,35 +38,39 @@ NaturePanelForge uses three executable agent stages. Each stage writes machine-c
 
 **Final Refine** starts from first-pass reproductions that already passed review. A polish agent edits the existing code, while an audit agent checks Arial typography, label/tick/legend overlap, scientific symbols, edge clipping, compactness, complexity score, and caption-based description.
 
+![Agent loops for high-fidelity panel-to-code reproduction](docs/assets/agent_loop.png)
+
+This loop is the core mechanism for high-quality panel-to-code reproduction: each stage separates execution from review, records artifacts on disk, and iterates until the panel split, executable reproduction, or final refine result passes the corresponding audit.
+
 ## Codex Reproduction Examples
 
 Target panels from real paper figures are shown beside Codex-rendered outputs. Each reproduction is generated from executable plotting code, not manual image editing.
 
 ![Target panels beside Codex reproductions](docs/assets/reproduction_examples/codex_reproduction_pairs.png)
 
-## Public Modes
+## Usage
 
 Use `forge.py` for the four public workflows. Each mode can be started with one command.
 
-1. Single cropped panel image -> plotting code
+1. **Single cropped panel image -> plotting code**
 
 ```bash
 python3 forge.py single-panel-image --image /path/to/target_panel.png --panel-id demo_panel --chart-type bar --caption "A grouped bar chart with error bars and a legend." --out-root UserRuns/panel_demo --model gpt-5.4 --reasoning-effort medium --review-rounds 4 --skip-existing
 ```
 
-2. Single full figure image -> reviewed panel crops
+2. **Single full figure image -> reviewed panel crops**
 
 ```bash
 python3 forge.py single-full-image --image /path/to/full_figure.png --paper-id demo_paper --caption "A complete multi-panel scientific figure." --out-root UserRuns/full_demo --model gpt-5.4 --reasoning-effort medium --review-rounds 4 --skip-existing
 ```
 
-3. Single paper -> paper metadata and full figures
+3. **Single paper -> paper metadata and full figures**
 
 ```bash
 python3 forge.py single-paper --doi 10.1038/s41467-025-12345-6 --subject biology --topic AI_biology --figures-per-paper 5 --download-only
 ```
 
-4. Batched papers -> full paper-to-panel-to-code workflow
+4. **Batched papers -> full paper-to-panel-to-code workflow**
 
 ```bash
 python3 forge.py batched-paper --subject materials --topic AI_materials --target-papers 20 --batch-size 20 --figures-per-paper 5 --years 2024,2025,2026 --codex-model gpt-5.4 --codex-jobs 8
