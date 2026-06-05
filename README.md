@@ -95,11 +95,11 @@ docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
 </tr>
 </table>
 
-One-command install:
+One sentence to Codex:
 
-```bash
-bash scripts/install_skills.sh
-```
+**Install the NaturePanelForge Codex skill for me: https://github.com/littlepeachs/NaturePanelForge**
+
+Codex will read the repository, install the bundled `codex-panel-reproduce` skill, and verify that it is available locally.
 
 One-sentence Prompt after install:
 
@@ -219,47 +219,21 @@ The default Qwen path is local `transformers` loading through `--qwen-backend tr
 
 ## Install The Codex Skill
 
-Yes, the Codex reproduce/refine workflow can be packaged as a local skill. This repository includes:
+The easiest way is to let Codex install it from this GitHub repository. Already inside Codex? Paste one sentence:
+
+**Install the NaturePanelForge Codex skill for me: https://github.com/littlepeachs/NaturePanelForge**
+
+Codex should clone or open the repository, install `skills/codex-panel-reproduce/SKILL.md` into the local Codex skills directory, and verify that this file exists:
 
 ```text
-skills/codex-panel-reproduce/SKILL.md
+${CODEX_HOME:-$HOME/.codex}/skills/codex-panel-reproduce/SKILL.md
 ```
 
-Install all bundled skills into local Codex:
+After installation, say:
 
-```bash
-bash scripts/install_skills.sh
-```
+**Use the installed `codex-panel-reproduce` skill to reproduce my target panel as editable Python/matplotlib code.**
 
-Dry-run the installer:
-
-```bash
-DRY_RUN=1 bash scripts/install_skills.sh
-```
-
-The live installer replaces destination skill directories with the same names under `${CODEX_HOME:-$HOME/.codex}/skills`. Run the dry-run first if you already keep custom local skills there.
-
-You can also paste this into a local Codex session and let it install the skill for you:
-
-```text
-Please install the NaturePanelForge bundled Codex skill on this machine.
-
-Steps:
-1. Confirm that the current working directory is the NaturePanelForge repository root. If it is not, ask me for the repository path before running commands.
-
-2. Run a dry-run first:
-   DRY_RUN=1 bash scripts/install_skills.sh
-
-3. If the dry-run succeeds and shows that codex-panel-reproduce will be installed into ${CODEX_HOME:-$HOME/.codex}/skills, run the live install:
-   bash scripts/install_skills.sh
-
-4. Check that this file exists:
-   ${CODEX_HOME:-$HOME/.codex}/skills/codex-panel-reproduce/SKILL.md
-
-5. Do not modify other project files. Report the install path, dry-run summary, and whether the live install succeeded.
-```
-
-After installation, local Codex can read the `codex-panel-reproduce` skill and follow the single-panel reproduction/refine workflow without re-learning the prompt structure from scratch.
+Local Codex can then follow the single-panel reproduction/refine workflow without re-learning the prompt structure from scratch.
 
 ## Repository Layout
 

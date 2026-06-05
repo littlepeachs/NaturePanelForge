@@ -95,11 +95,11 @@ docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
 </tr>
 </table>
 
-一句命令安装：
+对 Codex 说一句话安装：
 
-```bash
-bash scripts/install_skills.sh
-```
+**Install the NaturePanelForge Codex skill for me: https://github.com/littlepeachs/NaturePanelForge**
+
+Codex 会读取这个仓库，安装仓库附带的 `codex-panel-reproduce` skill，并检查本地是否安装成功。
 
 安装后，一句话 Prompt：
 
@@ -218,47 +218,21 @@ export CUDA_VISIBLE_DEVICES=0
 
 ## 安装 Codex Skill
 
-Codex reproduce/refine 工作流可以打包成本地 skill。本仓库包含：
+最简单的方式是让 Codex 直接根据这个 GitHub 仓库安装。已经在 Codex 里？直接粘贴一句话：
+
+**Install the NaturePanelForge Codex skill for me: https://github.com/littlepeachs/NaturePanelForge**
+
+Codex 应该 clone 或打开这个仓库，把 `skills/codex-panel-reproduce/SKILL.md` 安装到本地 Codex skills 目录，并检查这个文件是否存在：
 
 ```text
-skills/codex-panel-reproduce/SKILL.md
+${CODEX_HOME:-$HOME/.codex}/skills/codex-panel-reproduce/SKILL.md
 ```
 
-安装仓库内所有 skill：
+安装后，对 Codex 说：
 
-```bash
-bash scripts/install_skills.sh
-```
+**Use the installed `codex-panel-reproduce` skill to reproduce my target panel as editable Python/matplotlib code.**
 
-先 dry-run：
-
-```bash
-DRY_RUN=1 bash scripts/install_skills.sh
-```
-
-正式安装会把同名 skill 目录复制到 `${CODEX_HOME:-$HOME/.codex}/skills`。如果你已经有自定义本地 skill，建议先运行 dry-run。
-
-也可以把下面这段 prompt 直接粘贴给本地 Codex，让它自动安装：
-
-```text
-Please install the NaturePanelForge bundled Codex skill on this machine.
-
-Steps:
-1. Confirm that the current working directory is the NaturePanelForge repository root. If it is not, ask me for the repository path before running commands.
-
-2. Run a dry-run first:
-   DRY_RUN=1 bash scripts/install_skills.sh
-
-3. If the dry-run succeeds and shows that codex-panel-reproduce will be installed into ${CODEX_HOME:-$HOME/.codex}/skills, run the live install:
-   bash scripts/install_skills.sh
-
-4. Check that this file exists:
-   ${CODEX_HOME:-$HOME/.codex}/skills/codex-panel-reproduce/SKILL.md
-
-5. Do not modify other project files. Report the install path, dry-run summary, and whether the live install succeeded.
-```
-
-安装后，本地 Codex 可以直接读取 `codex-panel-reproduce` skill，并按单 panel 复现和 refine 工作流执行。
+本地 Codex 就可以读取 `codex-panel-reproduce` skill，并按单 panel 复现和 refine 工作流执行。
 
 ## 仓库结构
 
