@@ -48,40 +48,104 @@ NaturePanelForge 是一个 code-first 工作流，用于把真实科学论文图
 
 ## 快速上手
 
-这个 demo 从一张真实 Nature Communications 的 bubble plot panel 开始，展示 NaturePanelForge 的目标输出：可编辑的 `matplotlib` 脚本，以及重新渲染得到的 PNG/PDF。
+快速上手保持很小：从一张裁剪好的科学论文 panel 出发，用可编辑的 `matplotlib` 代码重新渲染图片，并且可以选择重新跑完整 Codex review loop。仓库内置两个 demo case：
+
+- `docs/demo/quick_start_bubble_plot/`：默认 bubble plot 离线重渲染示例。
+- `docs/demo/quick_start_skill_bubble_plot/`：本次 `codex-panel-reproduce` skill 运行案例，包含 target/reproduction 图片和中英文 prompt。
 
 <table>
 <tr>
-<td width="50%" align="center"><b>真实论文目标 panel</b></td>
+<td width="50%" align="center"><b>目标 panel</b></td>
 <td width="50%" align="center"><b>可执行 Python 复现结果</b></td>
 </tr>
 <tr>
-<td><img src="docs/demo/quick_start_bubble_plot/target.png" alt="Target GO enrichment bubble plot panel" width="100%"/></td>
-<td><img src="docs/demo/quick_start_bubble_plot/reproduce_panel.png" alt="NaturePanelForge reproduced bubble plot panel" width="100%"/></td>
+<td><img src="docs/demo/quick_start_skill_bubble_plot/target.png" alt="Target GO enrichment bubble plot panel for the skill quick start" width="100%"/></td>
+<td><img src="docs/demo/quick_start_skill_bubble_plot/reproduce_panel.png" alt="NaturePanelForge reproduced bubble plot panel from the skill quick start" width="100%"/></td>
 </tr>
 </table>
 
-本地跑通这个 demo：
+本地跑默认 demo：
 
 ```bash
 bash scripts/run_quick_start_demo.sh
 ```
 
-默认会重新渲染：
+本地跑本次 skill 示例：
+
+```bash
+DEMO_CASE=quick_start_skill_bubble_plot bash scripts/run_quick_start_demo.sh
+```
+
+离线重渲染会运行已提交的可编辑脚本，并在 demo 文件夹内写出 PNG/PDF：
 
 ```text
-docs/demo/quick_start_bubble_plot/reproduce_panel.py
-docs/demo/quick_start_bubble_plot/reproduce_panel.png
-docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
+docs/demo/<demo_case>/reproduce_panel.py
+docs/demo/<demo_case>/reproduce_panel.png
+docs/demo/<demo_case>/reproduce_panel.pdf
 ```
 
 如果要从目标 panel 图像重新走完整 Codex agent loop：
 
 ```bash
-RUN_CODEX=1 bash scripts/run_quick_start_demo.sh
+RUN_CODEX=1 DEMO_CASE=quick_start_skill_bubble_plot OUT_ROOT=UserRuns/my_skill_test_from_docs bash scripts/run_quick_start_demo.sh
 ```
 
-如果你想把自己的数据画成同样风格，可以直接修改 `docs/demo/quick_start_bubble_plot/reproduce_panel.py` 里的数据数组和标签，然后重新运行脚本。如果目标是“拿一张参考论文图，把自己的新数据画成类似风格”，FigMirror 更像面向普通研究者的产品；NaturePanelForge 的重点是从真实论文图构建 scientific panel-to-code benchmark。
+完整运行会在 `UserRuns/` 下写出目标 bundle、代码输出、review notes、review summary、run log 和 contract result。本次 skill 示例的可复制 prompt 文件在：
+
+- [English prompt](docs/demo/quick_start_skill_bubble_plot/prompt.en.md)
+- [中文 prompt](docs/demo/quick_start_skill_bubble_plot/prompt.zh-CN.md)
+
+<details>
+<summary>中文 Prompt</summary>
+
+```text
+请使用已安装的 codex-panel-reproduce skill，帮我复现这个科学论文 panel 图像为可编辑的 Python/matplotlib 代码。
+
+目标图像：docs/demo/quick_start_skill_bubble_plot/target.png
+可选 PDF：docs/demo/quick_start_skill_bubble_plot/target.pdf
+输出根目录：UserRuns/my_skill_test
+panel id：my_skill_test
+图类型：bubble_plot
+caption：A faceted GO enrichment bubble plot with Human and Mouse columns, biological process labels on the left, x axis as -log10(p.value), bubble size encoding log10(count), and colors encoding biological groups.
+
+要求：
+1. 使用 codex-panel-reproduce skill。
+2. 不要使用 Qwen scoring，这是本地用户提供的图片。
+3. 不要手工修改图片，只生成可执行绘图代码。
+4. 运行 NaturePanelForge 的单图复现 workflow。
+5. 生成 reproduce_panel.py、reproduce_panel.png、reproduce_panel.pdf。
+6. 生成 review notes、review summary、run log。
+7. 最后告诉我输出目录、review_passed、contract_passed、最终 PNG 尺寸和重新渲染命令。
+```
+
+</details>
+
+<details>
+<summary>English prompt</summary>
+
+```text
+Please use the installed codex-panel-reproduce skill to reproduce this scientific paper panel as editable Python/matplotlib code.
+
+Target image: docs/demo/quick_start_skill_bubble_plot/target.png
+Optional PDF: docs/demo/quick_start_skill_bubble_plot/target.pdf
+Output root: UserRuns/my_skill_test
+Panel id: my_skill_test
+Chart type: bubble_plot
+Caption: A faceted GO enrichment bubble plot with Human and Mouse columns, biological process labels on the left, x axis as -log10(p.value), bubble size encoding log10(count), and colors encoding biological groups.
+
+Requirements:
+1. Use the codex-panel-reproduce skill.
+2. Do not use Qwen scoring; this is a local user-supplied image.
+3. Do not manually modify images; generate executable plotting code only.
+4. Run the NaturePanelForge single-panel reproduction workflow.
+5. Generate reproduce_panel.py, reproduce_panel.png, and reproduce_panel.pdf.
+6. Generate review notes, review summary, and run log.
+7. Finally report the output directory, review_passed, contract_passed, final PNG size, and rerender command.
+```
+
+</details>
+
+如果你想把自己的数据画成同样风格，可以直接修改 `docs/demo/quick_start_skill_bubble_plot/reproduce_panel.py` 里的数据数组和标签，然后重新运行脚本。如果目标是“拿一张参考论文图，把自己的新数据画成类似风格”，FigMirror 更像面向普通研究者的产品；NaturePanelForge 的重点是从真实论文图构建 scientific panel-to-code benchmark。
 
 ## Agent Workflow
 

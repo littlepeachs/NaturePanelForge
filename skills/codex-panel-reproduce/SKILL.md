@@ -9,10 +9,12 @@ description: Use this skill when asked to reproduce or refine a single scientifi
 
 Use this for code-only reproduction or refinement of one scientific figure panel in NaturePanelForge. The target is an editable Python script plus rendered PNG/PDF, not image editing or raster tracing.
 
+For local user-supplied images, do not run Qwen scoring and do not require Qwen outputs. Qwen context is only optional metadata when the input already comes from an existing SciFigureHub/NaturePanelForge pipeline directory.
+
 ## Inputs
 
 - Single-image workflow: a target panel image path, optional caption, optional source PDF.
-- Existing-panel workflow: a panel directory containing `target.png`; optional `metadata.json`, `qwen_score.json`, `qwen_prompt.md`, and `raw_response.txt`.
+- Existing-panel workflow: a panel directory containing `target.png`; optional `metadata.json`, `qwen_score.json`, `qwen_prompt.md`, and `raw_response.txt`. Missing Qwen files are acceptable for user-supplied images.
 - Refine workflow: an existing panel directory containing `target.png`, `reproduce_panel.py`, `reproduce_panel.png`, and `reproduce_panel.pdf`.
 
 ## Reproduce One Panel
@@ -20,7 +22,7 @@ Use this for code-only reproduction or refinement of one scientific figure panel
 Run from the NaturePanelForge repo root:
 
 ```bash
-python3 -m nature_panel_forge.reproduce_image \
+python3 forge.py single-panel-image \
   --image path/to/target_panel.png \
   --out-root UserRuns/single_panel \
   --panel-id my_panel \
@@ -29,6 +31,8 @@ python3 -m nature_panel_forge.reproduce_image \
   --review-rounds 4 \
   --skip-existing
 ```
+
+This command prepares the local single-image bundle itself. It writes placeholder user-image metadata as needed; it does not classify the image with Qwen and does not need a local Qwen model.
 
 For an existing panel directory:
 
@@ -99,3 +103,18 @@ Before reporting success, verify:
 - Review summary JSON has `review_passed: true`.
 - Refine runs also have `font_audit_passed`, `layout_audit_passed`, and `edge_visibility_passed` set to true.
 - The final response lists created files, final PNG size, iteration count, and the regeneration command.
+
+## Natural-Language Use
+
+When the user asks in natural language, infer the CLI call and run the workflow. A good request looks like:
+
+```text
+Use the codex-panel-reproduce skill to reproduce this scientific panel as editable Python/matplotlib code.
+Target image: /path/to/target_panel.png
+Optional PDF: /path/to/target_panel.pdf
+Output root: UserRuns/my_panel
+Panel id: my_panel
+Chart type: bubble_plot
+Caption: A short description of the visual structure, axes, legend, and data pattern.
+Do not use Qwen scoring. Generate reproduce_panel.py, reproduce_panel.png, reproduce_panel.pdf, review notes, review summary, and a run log. Then report the output directory, review_passed, contract_passed, final PNG size, and rerender command.
+```
