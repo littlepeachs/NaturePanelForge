@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="144" viewBox="0 0 760 144" role="img" aria-labelledby="title desc">
+  <title id="title">NaturePanelForge</title>
+  <desc id="desc">NaturePanelForge project wordmark with icon.</desc>
+  <rect width="760" height="144" fill="none"/>
+  <image href="nature_panel_forge_icon.svg" x="12" y="12" width="120" height="120"/>
+  <text x="154" y="67" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="800">NaturePanelForge</text>
+  <text x="156" y="102" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="500">Nature-level scientific panels to executable plotting code</text>
+  <path d="M154 116H556" stroke="#2563eb" stroke-width="5" stroke-linecap="round"/>
+  <path d="M568 116H642" stroke="#0f766e" stroke-width="5" stroke-linecap="round"/>
+  <path d="M654 116H712" stroke="#ea580c" stroke-width="5" stroke-linecap="round"/>
+</svg>

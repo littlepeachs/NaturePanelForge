@@ -1,19 +1,31 @@
-# NaturePanelForge
+<h1 align="center">
+  <img src="docs/assets/nature_panel_forge_icon.svg" alt="NaturePanelForge icon" width="120"><br/>
+  NaturePanelForge
+</h1>
 
-NaturePanelForge is a code-first workflow for turning scientific figure images and open-access Nature-family papers into panel-level, executable plotting-code reconstruction tasks.
+<p align="center">
+  <b>Forge Nature-level scientific panels into executable plotting code.</b><br/>
+  Retrieve open-access papers, split full figures into reviewed panels, classify them with Qwen, and reproduce statistical panels with Codex agent loops.
+</p>
 
-It has two core goals:
+<p align="center">
+  <a href="https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/"><img alt="Gallery live demo" src="docs/assets/badges/gallery.svg"></a>
+  <a href="#usage"><img alt="Usage four modes" src="docs/assets/badges/usage.svg"></a>
+  <a href="#agent-workflow"><img alt="Agent loop refine" src="docs/assets/badges/agent_loop.svg"></a>
+  <a href="docs/intro_and_methods.md"><img alt="Method and stats" src="docs/assets/badges/method.svg"></a>
+  <a href="#install-the-codex-skill"><img alt="Codex skill install" src="docs/assets/badges/codex_skill.svg"></a>
+</p>
 
-- Extract Nature-level full figures into reviewed, metadata-rich scientific panels.
-- Reproduce selected statistical panels as editable Python plotting code, then polish them through a final review loop.
+<p align="center">
+  <a href="#usage">Usage</a> |
+  <a href="#agent-workflow">Agent Workflow</a> |
+  <a href="#codex-reproduction-examples">Examples</a> |
+  <a href="#quick-start">Quick Start</a> |
+  <a href="docs/intro_and_methods.md">Method</a> |
+  <a href="TUTORIAL.md">Tutorial</a>
+</p>
 
-Maintainer-hosted gallery demo:
-
-```text
-https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/
-```
-
-The repository does not depend on this hosted demo.
+NaturePanelForge is a code-first workflow for turning scientific figure images and open-access Nature-family papers into panel-level, executable plotting-code reconstruction tasks. The repository does not depend on the hosted gallery demo.
 
 ![NaturePanelForge gallery walkthrough](docs/assets/show_preview.gif)
 

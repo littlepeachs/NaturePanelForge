@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="148" height="28" viewBox="0 0 148 28" role="img" aria-label="Codex skill installable">
+  <rect width="148" height="28" rx="5" fill="#0f172a"/>
+  <rect x="72" width="76" height="28" rx="5" fill="#0891b2"/>
+  <path d="M72 0H77V28H72Z" fill="#0891b2"/>
+  <text x="12" y="19" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">Codex skill</text>
+  <text x="87" y="19" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">install</text>
+</svg>
