@@ -1,0 +1,22 @@
+{
+  "panel_id": "10-1038-s41467-026-68811-8__fig02_e",
+  "category": "data_statistical",
+  "data_subtype": "bubble_plot",
+  "is_complete_panel": true,
+  "has_foreign_overlap": false,
+  "xy_label_applicable": true,
+  "xy_label_complete": "yes",
+  "xytick_applicable": true,
+  "xytick_complete": "yes",
+  "clarity_integrity_score": 10.0,
+  "data_purity": "pure_data_statistical",
+  "data_purity_score": 10.0,
+  "code_reproducibility_score": 9.0,
+  "aesthetic_score": 9.0,
+  "overall_quality_score": 9.0,
+  "confidence": 1.0,
+  "is_good_quality": true,
+  "short_reason": "This is a complete, high-quality bubble plot (dot plot) showing GO enrichment analysis with clear axes, labels, and legend, suitable for code reproduction.",
+  "target_path": "PipelineRuns/biology/AI_biology/run_20260514_125341_batch001/QwenPanelScore/10-1038-s41467-026-68811-8__fig02_e/target.png",
+  "prompt_path": "PipelineRuns/biology/AI_biology/run_20260514_125341_batch001/QwenPanelScore/10-1038-s41467-026-68811-8__fig02_e/qwen_prompt.md"
+}

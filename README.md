@@ -22,9 +22,10 @@
 
 <p align="center">
   <a href="#usage">Usage</a> |
+  <a href="#quick-start-demo">Quick Start Demo</a> |
   <a href="#agent-workflow">Agent Workflow</a> |
   <a href="#codex-reproduction-examples">Examples</a> |
-  <a href="#quick-start">Quick Start</a> |
+  <a href="#setup">Setup</a> |
   <a href="docs/intro_and_methods.md">Method</a> |
   <a href="TUTORIAL.md">Tutorial</a>
 </p>
@@ -44,6 +45,43 @@ NaturePanelForge is a code-first workflow for turning scientific figure images a
 ![NaturePanelForge gallery catalog](docs/assets/nature_panel_forge_web2.png)
 
 For the project introduction, methods, current dataset counts, Qwen score distributions, and Codex refine complexity distribution, see [Introduction and Methods](docs/intro_and_methods.md).
+
+## Quick Start Demo
+
+This demo starts from a real Nature Communications bubble-plot panel and shows the intended result: an editable `matplotlib` script plus regenerated PNG/PDF outputs.
+
+<table>
+<tr>
+<td width="50%" align="center"><b>Target paper panel</b></td>
+<td width="50%" align="center"><b>Executable Python reproduction</b></td>
+</tr>
+<tr>
+<td><img src="docs/demo/quick_start_bubble_plot/target.png" alt="Target GO enrichment bubble plot panel" width="100%"/></td>
+<td><img src="docs/demo/quick_start_bubble_plot/reproduce_panel.png" alt="NaturePanelForge reproduced bubble plot panel" width="100%"/></td>
+</tr>
+</table>
+
+Run the packaged demo locally:
+
+```bash
+bash scripts/run_quick_start_demo.sh
+```
+
+The default demo rerenders:
+
+```text
+docs/demo/quick_start_bubble_plot/reproduce_panel.py
+docs/demo/quick_start_bubble_plot/reproduce_panel.png
+docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
+```
+
+To run the full Codex agent loop from the target panel image:
+
+```bash
+RUN_CODEX=1 bash scripts/run_quick_start_demo.sh
+```
+
+To use your own data in the same visual style, edit the data arrays and labels in `docs/demo/quick_start_bubble_plot/reproduce_panel.py`, then rerun the script. If your goal is specifically “take a reference plot style and redraw my new data in that style,” FigMirror is the more product-like path; NaturePanelForge focuses on building scientific panel-to-code benchmark examples from real papers.
 
 ## Agent Workflow
 
@@ -113,7 +151,7 @@ result.json
 
 `user_reproduce_summary.json` and `result.json` include the generated code text, output paths, review status, missing-output checks, and whether the live contract passed. Dry-runs intentionally set `live_contract_checked=false` and `contract_passed=false`.
 
-## Quick Start
+## Setup
 
 ```bash
 cd NaturePanelForge

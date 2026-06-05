@@ -22,9 +22,10 @@
 
 <p align="center">
   <a href="#使用方式">使用方式</a> |
+  <a href="#快速上手">快速上手</a> |
   <a href="#agent-workflow">Agent Workflow</a> |
   <a href="#codex-复现示例">复现示例</a> |
-  <a href="#快速开始">快速开始</a> |
+  <a href="#环境配置">环境配置</a> |
   <a href="docs/intro_and_methods.md">方法与统计</a> |
   <a href="TUTORIAL.md">教程</a>
 </p>
@@ -44,6 +45,43 @@ NaturePanelForge 是一个 code-first 工作流，用于把真实科学论文图
 ![NaturePanelForge gallery catalog](docs/assets/nature_panel_forge_web2.png)
 
 项目介绍、方法、当前数据量、Qwen 分数分布和 Codex refine 复杂度分布见 [Introduction and Methods](docs/intro_and_methods.md)。
+
+## 快速上手
+
+这个 demo 从一张真实 Nature Communications 的 bubble plot panel 开始，展示 NaturePanelForge 的目标输出：可编辑的 `matplotlib` 脚本，以及重新渲染得到的 PNG/PDF。
+
+<table>
+<tr>
+<td width="50%" align="center"><b>真实论文目标 panel</b></td>
+<td width="50%" align="center"><b>可执行 Python 复现结果</b></td>
+</tr>
+<tr>
+<td><img src="docs/demo/quick_start_bubble_plot/target.png" alt="Target GO enrichment bubble plot panel" width="100%"/></td>
+<td><img src="docs/demo/quick_start_bubble_plot/reproduce_panel.png" alt="NaturePanelForge reproduced bubble plot panel" width="100%"/></td>
+</tr>
+</table>
+
+本地跑通这个 demo：
+
+```bash
+bash scripts/run_quick_start_demo.sh
+```
+
+默认会重新渲染：
+
+```text
+docs/demo/quick_start_bubble_plot/reproduce_panel.py
+docs/demo/quick_start_bubble_plot/reproduce_panel.png
+docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
+```
+
+如果要从目标 panel 图像重新走完整 Codex agent loop：
+
+```bash
+RUN_CODEX=1 bash scripts/run_quick_start_demo.sh
+```
+
+如果你想把自己的数据画成同样风格，可以直接修改 `docs/demo/quick_start_bubble_plot/reproduce_panel.py` 里的数据数组和标签，然后重新运行脚本。如果目标是“拿一张参考论文图，把自己的新数据画成类似风格”，FigMirror 更像面向普通研究者的产品；NaturePanelForge 的重点是从真实论文图构建 scientific panel-to-code benchmark。
 
 ## Agent Workflow
 
@@ -112,7 +150,7 @@ result.json
 
 `user_reproduce_summary.json` 和 `result.json` 会记录生成代码、输出路径、review 状态、缺失文件检查，以及 live contract 是否通过。dry-run 会显式设置 `live_contract_checked=false` 和 `contract_passed=false`。
 
-## 快速开始
+## 环境配置
 
 ```bash
 cd NaturePanelForge

@@ -59,6 +59,8 @@ gallery/electronics/
 !docs/assets/
 !docs/assets/**
 docs/assets/show.mov
+!docs/demo/
+!docs/demo/**
 !gallery/assets/favicon.svg
 
 # Model weights and local caches
