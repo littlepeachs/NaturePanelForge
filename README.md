@@ -29,6 +29,10 @@
   <a href="TUTORIAL.md">Tutorial</a>
 </p>
 
+<p align="center">
+  <b>English</b> | <a href="README.zh-CN.md">中文</a>
+</p>
+
 NaturePanelForge is a code-first workflow for turning scientific figure images and open-access Nature-family papers into panel-level, executable plotting-code reconstruction tasks. The repository does not depend on the hosted gallery demo.
 
 ![NaturePanelForge gallery walkthrough](docs/assets/show_preview.gif)
