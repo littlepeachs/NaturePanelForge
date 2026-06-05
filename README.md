@@ -82,7 +82,7 @@ docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
 
 ### **Mode 2. Install Codex Skill Mode**
 
-**Install the bundled Code Skill, then run one Prompt inside Codex.** Codex uses `codex-panel-reproduce` to read the target image, write editable Python/matplotlib code, render the reproduction image/PDF, and save review files.
+**Install the bundled Code Skill, then paste the full System Prompt inside Codex.** Codex uses `codex-panel-reproduce` to read the target image, write editable Python/matplotlib code, render the reproduction image/PDF, and save review files.
 
 <table>
 <tr>
@@ -95,17 +95,57 @@ docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
 </tr>
 </table>
 
-One sentence to Codex:
+**Install Skill Prompt:**
 
-**Install the NaturePanelForge Codex skill for me: https://github.com/littlepeachs/NaturePanelForge**
+```text
+Install the NaturePanelForge Codex skill for me: https://github.com/littlepeachs/NaturePanelForge
+```
 
 Codex will read the repository, install the bundled `codex-panel-reproduce` skill, and verify that it is available locally.
 
-One-sentence Prompt after install:
+**English System Prompt:**
 
-**English Prompt:** **Use the installed `codex-panel-reproduce` skill to reproduce `docs/demo/quick_start_skill_bubble_plot/target.png` as editable Python/matplotlib code; do not use Qwen scoring; save outputs under `UserRuns/my_skill_test`; then report `review_passed`, `contract_passed`, final PNG size, and the rerender command.**
+```text
+Please use the installed codex-panel-reproduce skill to reproduce this scientific paper panel as editable Python/matplotlib code.
 
-**中文 Prompt：** **请使用已安装的 `codex-panel-reproduce` skill，把 `docs/demo/quick_start_skill_bubble_plot/target.png` 复现为可编辑的 Python/matplotlib 代码；不要使用 Qwen scoring；输出到 `UserRuns/my_skill_test`；最后报告 `review_passed`、`contract_passed`、最终 PNG 尺寸和重新渲染命令。**
+Target image: docs/demo/quick_start_skill_bubble_plot/target.png
+Optional PDF: docs/demo/quick_start_skill_bubble_plot/target.pdf
+Output root: UserRuns/my_skill_test
+Panel id: my_skill_test
+Chart type: bubble_plot
+Caption: A faceted GO enrichment bubble plot with Human and Mouse columns, biological process labels on the left, x axis as -log10(p.value), bubble size encoding log10(count), and colors encoding biological groups.
+
+Requirements:
+1. Use the codex-panel-reproduce skill.
+2. Do not use Qwen scoring; this is a local user-supplied image.
+3. Do not manually modify images; generate executable plotting code only.
+4. Run the NaturePanelForge single-panel reproduction workflow.
+5. Generate reproduce_panel.py, reproduce_panel.png, and reproduce_panel.pdf.
+6. Generate review notes, review summary, and run log.
+7. Finally report the output directory, review_passed, contract_passed, final PNG size, and rerender command.
+```
+
+**中文 System Prompt：**
+
+```text
+请使用已安装的 codex-panel-reproduce skill，帮我复现这个科学论文 panel 图像为可编辑的 Python/matplotlib 代码。
+
+目标图像：docs/demo/quick_start_skill_bubble_plot/target.png
+可选 PDF：docs/demo/quick_start_skill_bubble_plot/target.pdf
+输出根目录：UserRuns/my_skill_test
+panel id：my_skill_test
+图类型：bubble_plot
+caption：A faceted GO enrichment bubble plot with Human and Mouse columns, biological process labels on the left, x axis as -log10(p.value), bubble size encoding log10(count), and colors encoding biological groups.
+
+要求：
+1. 使用 codex-panel-reproduce skill。
+2. 不要使用 Qwen scoring，这是本地用户提供的图片。
+3. 不要手工修改图片，只生成可执行绘图代码。
+4. 运行 NaturePanelForge 的单图复现 workflow。
+5. 生成 reproduce_panel.py、reproduce_panel.png、reproduce_panel.pdf。
+6. 生成 review notes、review summary、run log。
+7. 最后告诉我输出目录、review_passed、contract_passed、最终 PNG 尺寸和重新渲染命令。
+```
 
 The target image is the input, and the reproduction image is the expected editable-code output. For the full prompts saved as files, see [English prompt](docs/demo/quick_start_skill_bubble_plot/prompt.en.md) and [中文 prompt](docs/demo/quick_start_skill_bubble_plot/prompt.zh-CN.md).
 
@@ -219,9 +259,13 @@ The default Qwen path is local `transformers` loading through `--qwen-backend tr
 
 ## Install The Codex Skill
 
-The easiest way is to let Codex install it from this GitHub repository. Already inside Codex? Paste one sentence:
+The easiest way is to let Codex install it from this GitHub repository. Already inside Codex? Paste this prompt:
 
-**Install the NaturePanelForge Codex skill for me: https://github.com/littlepeachs/NaturePanelForge**
+**Install Skill Prompt:**
+
+```text
+Install the NaturePanelForge Codex skill for me: https://github.com/littlepeachs/NaturePanelForge
+```
 
 Codex should clone or open the repository, install `skills/codex-panel-reproduce/SKILL.md` into the local Codex skills directory, and verify that this file exists:
 
@@ -229,9 +273,7 @@ Codex should clone or open the repository, install `skills/codex-panel-reproduce
 ${CODEX_HOME:-$HOME/.codex}/skills/codex-panel-reproduce/SKILL.md
 ```
 
-After installation, say:
-
-**Use the installed `codex-panel-reproduce` skill to reproduce my target panel as editable Python/matplotlib code.**
+After installation, use the full English or Chinese System Prompt shown in Quick Start Mode 2.
 
 Local Codex can then follow the single-panel reproduction/refine workflow without re-learning the prompt structure from scratch.
 
