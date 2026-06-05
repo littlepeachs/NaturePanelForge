@@ -9,6 +9,7 @@
 </p>
 
 <p align="center">
+  <a href="https://littlepeachs.github.io/NaturePanelForge/"><img alt="Project page" src="https://img.shields.io/badge/Project%20Page-GitHub%20Pages-111827?style=flat&logo=githubpages&logoColor=white"></a>
   <a href="https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/"><img alt="Gallery live demo" src="https://img.shields.io/badge/Gallery-live%20demo-2563eb?style=flat&logo=googlechrome&logoColor=white"></a>
   <a href="#使用方式"><img alt="Usage four modes" src="https://img.shields.io/badge/Usage-4%20modes-0f766e?style=flat&logo=python&logoColor=white"></a>
   <a href="#agent-workflow"><img alt="Agent loop refine" src="https://img.shields.io/badge/Agent%20Loop-reproduce%20%2B%20refine-ea580c?style=flat&logo=openai&logoColor=white"></a>
@@ -48,9 +49,11 @@ NaturePanelForge 是一个 code-first 工作流，用于把真实科学论文图
 
 ## 快速上手
 
-快速上手明确展示 NaturePanelForge 的两种不同使用方式：
+快速上手展示两条简单路径：
 
-**模式 1. 直接代码模式：直接运行仓库里已经提交的绘图代码。** 这是理解输出契约最快的方式，不需要重新跑 Codex loop，也不需要安装 skill；demo 脚本已经在仓库里。
+### **模式 1. 直接代码模式**
+
+**直接运行仓库里已经提交的绘图代码。** 这是最快路径：不需要重新跑 Codex loop，也不需要安装 skill。
 
 <table>
 <tr>
@@ -63,13 +66,13 @@ NaturePanelForge 是一个 code-first 工作流，用于把真实科学论文图
 </tr>
 </table>
 
-运行：
+一句命令运行：
 
 ```bash
 bash scripts/run_quick_start_demo.sh
 ```
 
-会重新渲染：
+会重新渲染已提交的脚本和图片：
 
 ```text
 docs/demo/quick_start_bubble_plot/reproduce_panel.py
@@ -77,7 +80,9 @@ docs/demo/quick_start_bubble_plot/reproduce_panel.png
 docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
 ```
 
-**模式 2. 安装 Codex Skill 模式：先安装仓库附带的 Code Skill，然后在 Codex 里通过 Prompt 来跑。** 这条路径展示真实的单图 agent workflow：Codex 读取 `codex-panel-reproduce` skill，准备目标 bundle，写出 `reproduce_panel.py`，渲染 PNG/PDF，并记录 review notes、review summary、run log 和 contract 状态。
+### **模式 2. 安装 Codex Skill 模式**
+
+**先安装仓库附带的 Code Skill，然后在 Codex 里用一句 Prompt 来跑。** Codex 会用 `codex-panel-reproduce` 读取原图、写出可编辑 Python/matplotlib 代码、渲染复现图/PDF，并保存 review 文件。
 
 <table>
 <tr>
@@ -90,73 +95,25 @@ docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
 </tr>
 </table>
 
-安装仓库附带的 skill：
+一句命令安装：
 
 ```bash
-DRY_RUN=1 bash scripts/install_skills.sh
 bash scripts/install_skills.sh
 ```
 
-然后把下面任意一个 prompt 粘贴到本地 Codex 会话里运行：
+安装后，一句话 Prompt：
 
-- [English prompt](docs/demo/quick_start_skill_bubble_plot/prompt.en.md)
-- [中文 prompt](docs/demo/quick_start_skill_bubble_plot/prompt.zh-CN.md)
+**中文 Prompt：** **请使用已安装的 `codex-panel-reproduce` skill，把 `docs/demo/quick_start_skill_bubble_plot/target.png` 复现为可编辑的 Python/matplotlib 代码；不要使用 Qwen scoring；输出到 `UserRuns/my_skill_test`；最后报告 `review_passed`、`contract_passed`、最终 PNG 尺寸和重新渲染命令。**
 
-也可以不跑 Codex，只离线重渲染已经提交的 Skill 模式结果：
+**English Prompt:** **Use the installed `codex-panel-reproduce` skill to reproduce `docs/demo/quick_start_skill_bubble_plot/target.png` as editable Python/matplotlib code; do not use Qwen scoring; save outputs under `UserRuns/my_skill_test`; then report `review_passed`, `contract_passed`, final PNG size, and the rerender command.**
+
+原图就是输入，复现图就是期望得到的可编辑代码输出。完整 prompt 文件也保留在 [中文 prompt](docs/demo/quick_start_skill_bubble_plot/prompt.zh-CN.md) 和 [English prompt](docs/demo/quick_start_skill_bubble_plot/prompt.en.md)。
+
+不跑 Codex 时，也可以离线重渲染已提交的 Skill 模式结果：
 
 ```bash
 DEMO_CASE=quick_start_skill_bubble_plot bash scripts/run_quick_start_demo.sh
 ```
-
-<details>
-<summary>中文 Prompt</summary>
-
-```text
-请使用已安装的 codex-panel-reproduce skill，帮我复现这个科学论文 panel 图像为可编辑的 Python/matplotlib 代码。
-
-目标图像：docs/demo/quick_start_skill_bubble_plot/target.png
-可选 PDF：docs/demo/quick_start_skill_bubble_plot/target.pdf
-输出根目录：UserRuns/my_skill_test
-panel id：my_skill_test
-图类型：bubble_plot
-caption：A faceted GO enrichment bubble plot with Human and Mouse columns, biological process labels on the left, x axis as -log10(p.value), bubble size encoding log10(count), and colors encoding biological groups.
-
-要求：
-1. 使用 codex-panel-reproduce skill。
-2. 不要使用 Qwen scoring，这是本地用户提供的图片。
-3. 不要手工修改图片，只生成可执行绘图代码。
-4. 运行 NaturePanelForge 的单图复现 workflow。
-5. 生成 reproduce_panel.py、reproduce_panel.png、reproduce_panel.pdf。
-6. 生成 review notes、review summary、run log。
-7. 最后告诉我输出目录、review_passed、contract_passed、最终 PNG 尺寸和重新渲染命令。
-```
-
-</details>
-
-<details>
-<summary>English prompt</summary>
-
-```text
-Please use the installed codex-panel-reproduce skill to reproduce this scientific paper panel as editable Python/matplotlib code.
-
-Target image: docs/demo/quick_start_skill_bubble_plot/target.png
-Optional PDF: docs/demo/quick_start_skill_bubble_plot/target.pdf
-Output root: UserRuns/my_skill_test
-Panel id: my_skill_test
-Chart type: bubble_plot
-Caption: A faceted GO enrichment bubble plot with Human and Mouse columns, biological process labels on the left, x axis as -log10(p.value), bubble size encoding log10(count), and colors encoding biological groups.
-
-Requirements:
-1. Use the codex-panel-reproduce skill.
-2. Do not use Qwen scoring; this is a local user-supplied image.
-3. Do not manually modify images; generate executable plotting code only.
-4. Run the NaturePanelForge single-panel reproduction workflow.
-5. Generate reproduce_panel.py, reproduce_panel.png, and reproduce_panel.pdf.
-6. Generate review notes, review summary, and run log.
-7. Finally report the output directory, review_passed, contract_passed, final PNG size, and rerender command.
-```
-
-</details>
 
 如果你想把自己的数据画成同样风格，可以直接修改任一 demo 的 `reproduce_panel.py` 数据数组和标签，然后重新运行脚本。如果目标是“拿一张参考论文图，把自己的新数据画成类似风格”，FigMirror 更像面向普通研究者的产品；NaturePanelForge 的重点是从真实论文图构建 scientific panel-to-code benchmark。
 
