@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="docs/assets/nature_panel_forge_icon.svg" alt="NaturePanelForge icon" width="120"><br/>
+  <img src="docs/assets/icon.png" alt="NaturePanelForge icon" width="180"><br/>
   NaturePanelForge
 </h1>
 
@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
-  <a href="https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/"><img alt="Gallery live demo" src="docs/assets/badges/gallery.svg"></a>
-  <a href="#usage"><img alt="Usage four modes" src="docs/assets/badges/usage.svg"></a>
-  <a href="#agent-workflow"><img alt="Agent loop refine" src="docs/assets/badges/agent_loop.svg"></a>
-  <a href="docs/intro_and_methods.md"><img alt="Method and stats" src="docs/assets/badges/method.svg"></a>
-  <a href="#install-the-codex-skill"><img alt="Codex skill install" src="docs/assets/badges/codex_skill.svg"></a>
+  <a href="https://uu543493-83c1-74a94416.nma1.seetacloud.com:8448/"><img alt="Gallery live demo" src="https://img.shields.io/badge/Gallery-live%20demo-2563eb?style=flat&logo=googlechrome&logoColor=white"></a>
+  <a href="#usage"><img alt="Usage four modes" src="https://img.shields.io/badge/Usage-4%20modes-0f766e?style=flat&logo=python&logoColor=white"></a>
+  <a href="#agent-workflow"><img alt="Agent loop refine" src="https://img.shields.io/badge/Agent%20Loop-reproduce%20%2B%20refine-ea580c?style=flat&logo=openai&logoColor=white"></a>
+  <a href="docs/intro_and_methods.md"><img alt="Method and stats" src="https://img.shields.io/badge/Method-stats%20%2B%20dataset-7c3aed?style=flat&logo=readme&logoColor=white"></a>
+  <a href="#install-the-codex-skill"><img alt="Codex skill install" src="https://img.shields.io/badge/Codex%20Skill-installable-0891b2?style=flat&logo=gnubash&logoColor=white"></a>
 </p>
 
 <p align="center">

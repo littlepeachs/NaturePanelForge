@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="142" height="28" viewBox="0 0 142 28" role="img" aria-label="Gallery live demo">
-  <rect width="142" height="28" rx="5" fill="#0f172a"/>
-  <rect x="70" width="72" height="28" rx="5" fill="#2563eb"/>
-  <path d="M70 0H75V28H70Z" fill="#2563eb"/>
-  <text x="12" y="19" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">Gallery</text>
-  <text x="82" y="19" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">live demo</text>
-</svg>
