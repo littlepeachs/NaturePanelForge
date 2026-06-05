@@ -17,6 +17,10 @@
 </p>
 
 <p align="center">
+  <img src="docs/assets/diagram.png" alt="NaturePanelForge input-output schematic: target scientific panel and optional metadata are converted into runnable Python plotting code." width="100%">
+</p>
+
+<p align="center">
   <a href="#usage">Usage</a> |
   <a href="#agent-workflow">Agent Workflow</a> |
   <a href="#codex-reproduction-examples">Examples</a> |
