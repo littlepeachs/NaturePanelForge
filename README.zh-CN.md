@@ -48,52 +48,65 @@ NaturePanelForge 是一个 code-first 工作流，用于把真实科学论文图
 
 ## 快速上手
 
-快速上手保持很小：从一张裁剪好的科学论文 panel 出发，用可编辑的 `matplotlib` 代码重新渲染图片，并且可以选择重新跑完整 Codex review loop。仓库内置两个 demo case：
+快速上手明确展示 NaturePanelForge 的两种不同使用方式：
 
-- `docs/demo/quick_start_bubble_plot/`：默认 bubble plot 离线重渲染示例。
-- `docs/demo/quick_start_skill_bubble_plot/`：本次 `codex-panel-reproduce` skill 运行案例，包含 target/reproduction 图片和中英文 prompt。
+**模式 1. 直接代码模式：直接运行仓库里已经提交的绘图代码。** 这是理解输出契约最快的方式，不需要重新跑 Codex loop，也不需要安装 skill；demo 脚本已经在仓库里。
 
 <table>
 <tr>
-<td width="50%" align="center"><b>目标 panel</b></td>
-<td width="50%" align="center"><b>可执行 Python 复现结果</b></td>
+<td width="50%" align="center"><b>直接代码模式原图</b></td>
+<td width="50%" align="center"><b>直接代码模式复现图</b></td>
 </tr>
 <tr>
-<td><img src="docs/demo/quick_start_skill_bubble_plot/target.png" alt="Target GO enrichment bubble plot panel for the skill quick start" width="100%"/></td>
-<td><img src="docs/demo/quick_start_skill_bubble_plot/reproduce_panel.png" alt="NaturePanelForge reproduced bubble plot panel from the skill quick start" width="100%"/></td>
+<td><img src="docs/demo/quick_start_bubble_plot/target.png" alt="Direct code mode target GO enrichment bubble plot panel" width="100%"/></td>
+<td><img src="docs/demo/quick_start_bubble_plot/reproduce_panel.png" alt="Direct code mode reproduced GO enrichment bubble plot panel" width="100%"/></td>
 </tr>
 </table>
 
-本地跑默认 demo：
+运行：
 
 ```bash
 bash scripts/run_quick_start_demo.sh
 ```
 
-本地跑本次 skill 示例：
+会重新渲染：
+
+```text
+docs/demo/quick_start_bubble_plot/reproduce_panel.py
+docs/demo/quick_start_bubble_plot/reproduce_panel.png
+docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
+```
+
+**模式 2. 安装 Codex Skill 模式：先安装仓库附带的 Code Skill，然后在 Codex 里通过 Prompt 来跑。** 这条路径展示真实的单图 agent workflow：Codex 读取 `codex-panel-reproduce` skill，准备目标 bundle，写出 `reproduce_panel.py`，渲染 PNG/PDF，并记录 review notes、review summary、run log 和 contract 状态。
+
+<table>
+<tr>
+<td width="50%" align="center"><b>Codex Skill 模式原图</b></td>
+<td width="50%" align="center"><b>Codex Skill 模式复现图</b></td>
+</tr>
+<tr>
+<td><img src="docs/demo/quick_start_skill_bubble_plot/target.png" alt="Codex Skill mode target GO enrichment bubble plot panel" width="100%"/></td>
+<td><img src="docs/demo/quick_start_skill_bubble_plot/reproduce_panel.png" alt="Codex Skill mode reproduced GO enrichment bubble plot panel" width="100%"/></td>
+</tr>
+</table>
+
+安装仓库附带的 skill：
+
+```bash
+DRY_RUN=1 bash scripts/install_skills.sh
+bash scripts/install_skills.sh
+```
+
+然后把下面任意一个 prompt 粘贴到本地 Codex 会话里运行：
+
+- [English prompt](docs/demo/quick_start_skill_bubble_plot/prompt.en.md)
+- [中文 prompt](docs/demo/quick_start_skill_bubble_plot/prompt.zh-CN.md)
+
+也可以不跑 Codex，只离线重渲染已经提交的 Skill 模式结果：
 
 ```bash
 DEMO_CASE=quick_start_skill_bubble_plot bash scripts/run_quick_start_demo.sh
 ```
-
-离线重渲染会运行已提交的可编辑脚本，并在 demo 文件夹内写出 PNG/PDF：
-
-```text
-docs/demo/<demo_case>/reproduce_panel.py
-docs/demo/<demo_case>/reproduce_panel.png
-docs/demo/<demo_case>/reproduce_panel.pdf
-```
-
-如果要从目标 panel 图像重新走完整 Codex agent loop：
-
-```bash
-RUN_CODEX=1 DEMO_CASE=quick_start_skill_bubble_plot OUT_ROOT=UserRuns/my_skill_test_from_docs bash scripts/run_quick_start_demo.sh
-```
-
-完整运行会在 `UserRuns/` 下写出目标 bundle、代码输出、review notes、review summary、run log 和 contract result。本次 skill 示例的可复制 prompt 文件在：
-
-- [English prompt](docs/demo/quick_start_skill_bubble_plot/prompt.en.md)
-- [中文 prompt](docs/demo/quick_start_skill_bubble_plot/prompt.zh-CN.md)
 
 <details>
 <summary>中文 Prompt</summary>
@@ -145,7 +158,7 @@ Requirements:
 
 </details>
 
-如果你想把自己的数据画成同样风格，可以直接修改 `docs/demo/quick_start_skill_bubble_plot/reproduce_panel.py` 里的数据数组和标签，然后重新运行脚本。如果目标是“拿一张参考论文图，把自己的新数据画成类似风格”，FigMirror 更像面向普通研究者的产品；NaturePanelForge 的重点是从真实论文图构建 scientific panel-to-code benchmark。
+如果你想把自己的数据画成同样风格，可以直接修改任一 demo 的 `reproduce_panel.py` 数据数组和标签，然后重新运行脚本。如果目标是“拿一张参考论文图，把自己的新数据画成类似风格”，FigMirror 更像面向普通研究者的产品；NaturePanelForge 的重点是从真实论文图构建 scientific panel-to-code benchmark。
 
 ## Agent Workflow
 

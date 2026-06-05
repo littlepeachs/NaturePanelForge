@@ -48,52 +48,65 @@ For the project introduction, methods, current dataset counts, Qwen score distri
 
 ## Quick Start Demo
 
-The quick start is intentionally small: it starts from a cropped scientific panel, regenerates the figure from editable `matplotlib` code, and can optionally run the full Codex review loop. Two checked-in cases are available:
+The quick start now shows two explicitly different ways to use NaturePanelForge:
 
-- `docs/demo/quick_start_bubble_plot/`: the default packaged bubble-plot renderer.
-- `docs/demo/quick_start_skill_bubble_plot/`: the `codex-panel-reproduce` skill run used as a copyable single-panel example, with target/reproduction images and bilingual prompts.
+**Mode 1. Direct Code Mode: run the checked-in plotting code directly.** This is the fastest path for understanding the output contract. No Codex loop or skill installation is required; the demo script is already in the repository.
 
 <table>
 <tr>
-<td width="50%" align="center"><b>Target panel</b></td>
-<td width="50%" align="center"><b>Executable Python reproduction</b></td>
+<td width="50%" align="center"><b>Direct Code Mode Target</b></td>
+<td width="50%" align="center"><b>Direct Code Mode Reproduction</b></td>
 </tr>
 <tr>
-<td><img src="docs/demo/quick_start_skill_bubble_plot/target.png" alt="Target GO enrichment bubble plot panel for the skill quick start" width="100%"/></td>
-<td><img src="docs/demo/quick_start_skill_bubble_plot/reproduce_panel.png" alt="NaturePanelForge reproduced bubble plot panel from the skill quick start" width="100%"/></td>
+<td><img src="docs/demo/quick_start_bubble_plot/target.png" alt="Direct code mode target GO enrichment bubble plot panel" width="100%"/></td>
+<td><img src="docs/demo/quick_start_bubble_plot/reproduce_panel.png" alt="Direct code mode reproduced GO enrichment bubble plot panel" width="100%"/></td>
 </tr>
 </table>
 
-Run the default packaged renderer locally:
+Run it:
 
 ```bash
 bash scripts/run_quick_start_demo.sh
 ```
 
-Run the skill example renderer:
+This rerenders:
+
+```text
+docs/demo/quick_start_bubble_plot/reproduce_panel.py
+docs/demo/quick_start_bubble_plot/reproduce_panel.png
+docs/demo/quick_start_bubble_plot/reproduce_panel.pdf
+```
+
+**Mode 2. Install Codex Skill Mode: install the bundled Code Skill, then run the reproduction from a Prompt inside Codex.** This path demonstrates the real single-panel agent workflow: Codex reads the `codex-panel-reproduce` skill, prepares the target bundle, writes `reproduce_panel.py`, renders PNG/PDF, and records review notes, review summary, run log, and contract status.
+
+<table>
+<tr>
+<td width="50%" align="center"><b>Codex Skill Mode Target</b></td>
+<td width="50%" align="center"><b>Codex Skill Mode Reproduction</b></td>
+</tr>
+<tr>
+<td><img src="docs/demo/quick_start_skill_bubble_plot/target.png" alt="Codex Skill mode target GO enrichment bubble plot panel" width="100%"/></td>
+<td><img src="docs/demo/quick_start_skill_bubble_plot/reproduce_panel.png" alt="Codex Skill mode reproduced GO enrichment bubble plot panel" width="100%"/></td>
+</tr>
+</table>
+
+Install the bundled skill:
+
+```bash
+DRY_RUN=1 bash scripts/install_skills.sh
+bash scripts/install_skills.sh
+```
+
+Then paste one of these prompts into a local Codex session:
+
+- [English prompt](docs/demo/quick_start_skill_bubble_plot/prompt.en.md)
+- [中文 prompt](docs/demo/quick_start_skill_bubble_plot/prompt.zh-CN.md)
+
+You can also rerender the checked-in Skill Mode output without running Codex:
 
 ```bash
 DEMO_CASE=quick_start_skill_bubble_plot bash scripts/run_quick_start_demo.sh
 ```
-
-Each offline render rerenders the checked-in editable script and writes PNG/PDF outputs beside it:
-
-```text
-docs/demo/<demo_case>/reproduce_panel.py
-docs/demo/<demo_case>/reproduce_panel.png
-docs/demo/<demo_case>/reproduce_panel.pdf
-```
-
-To run the full Codex agent loop from the target panel image:
-
-```bash
-RUN_CODEX=1 DEMO_CASE=quick_start_skill_bubble_plot OUT_ROOT=UserRuns/my_skill_test_from_docs bash scripts/run_quick_start_demo.sh
-```
-
-The live run creates the target bundle, code output, review notes, review summary, run log, and contract result under `UserRuns/`. The checked-in prompt files for the skill example are:
-
-- [English prompt](docs/demo/quick_start_skill_bubble_plot/prompt.en.md)
-- [中文 prompt](docs/demo/quick_start_skill_bubble_plot/prompt.zh-CN.md)
 
 <details>
 <summary>English prompt</summary>
@@ -145,7 +158,7 @@ caption：A faceted GO enrichment bubble plot with Human and Mouse columns, biol
 
 </details>
 
-To use your own data in the same visual style, edit the data arrays and labels in `docs/demo/quick_start_skill_bubble_plot/reproduce_panel.py`, then rerun the script. If your goal is specifically “take a reference plot style and redraw my new data in that style,” FigMirror is the more product-like path; NaturePanelForge focuses on building scientific panel-to-code benchmark examples from real papers.
+To use your own data in the same visual style, edit the data arrays and labels in one of the demo `reproduce_panel.py` scripts, then rerun it. If your goal is specifically “take a reference plot style and redraw my new data in that style,” FigMirror is the more product-like path; NaturePanelForge focuses on building scientific panel-to-code benchmark examples from real papers.
 
 ## Agent Workflow
 
