@@ -25,6 +25,7 @@
   <a href="#usage">Usage</a> |
   <a href="#quick-start-demo">Quick Start Demo</a> |
   <a href="#agent-workflow">Agent Workflow</a> |
+  <a href="#zero-shot-benchmark">Zero-Shot Benchmark</a> |
   <a href="#codex-reproduction-examples">Examples</a> |
   <a href="#setup">Setup</a> |
   <a href="docs/intro_and_methods.md">Method</a> |
@@ -174,6 +175,203 @@ NaturePanelForge uses three executable agent stages. Each stage writes machine-c
 
 This loop is the core mechanism for high-quality panel-to-code reproduction: each stage separates execution from review, records artifacts on disk, and iterates until the panel split, executable reproduction, or final refine result passes the corresponding audit.
 
+## Dataset Refinement
+
+NaturePanelForge uses a refined paper-to-panel-to-code workflow to build benchmark-ready scientific chart samples:
+
+```text
+open-access paper figures -> reviewed panel crops -> Qwen panel scoring ->
+Codex code reproduction -> Final Refine -> clean-sample audit -> benchmark manifests
+```
+
+The current SciFigure2Code release manifest contains 6,740 clean benchmark candidates from an 8,385-panel formal gallery. Clean samples include the original target PNG/PDF, refined reproduced PNG/PDF, editable `reproduce_panel.py`, description metadata, chart subtype, scientific domain, and complexity label.
+
+The GitHub repository keeps only the small smoke manifest under:
+
+```text
+SciFigure2Code/benchmark_ready/
+```
+
+Use subsets by cost:
+
+| Manifest | Use |
+|---|---|
+| `clean_tiny100.json` | checked-in quick smoke / pilot |
+| `clean_mini500.json` | download from the Hugging Face dataset release |
+| `clean_dev1000.json` | download from the Hugging Face dataset release |
+| `clean_samples.json` | download from the Hugging Face dataset release |
+
+For the full refinement procedure and audit criteria, see [Dataset Refinement Workflow](docs/dataset_refinement.md).
+
+## Zero-Shot Benchmark
+
+The repository includes the zero-shot SciFigure2Code evaluator and wrappers for the fixed 11-model benchmark. The evaluator generates plotting code from a target panel image, executes the code, saves candidate PNG/PDF artifacts, and reports P0/P1/P2 metrics.
+
+Prepare the environment:
+
+```bash
+cd NaturePanelForge
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+source configs/zeroshot.env.example
+```
+
+Download the SciPanelForge dataset from Hugging Face:
+
+```bash
+export HF_TOKEN="${HF_TOKEN:-}"  # optional for public files; required for private/gated access
+python - <<'PY'
+import os
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="littlepeachs/SciPanelForge",
+    repo_type="dataset",
+    local_dir=".data/SciPanelForge",
+    token=os.environ.get("HF_TOKEN") or None,
+)
+PY
+```
+
+If you need the Hugging Face mirror endpoint, set `HF_ENDPOINT` before running the same code:
+
+```bash
+export HF_ENDPOINT=https://hf-mirror.com
+export HF_TOKEN="${HF_TOKEN:-}"
+python - <<'PY'
+import os
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="littlepeachs/SciPanelForge",
+    repo_type="dataset",
+    local_dir=".data/SciPanelForge",
+    token=os.environ.get("HF_TOKEN") or None,
+    endpoint="https://hf-mirror.com",
+)
+PY
+```
+
+The helper script wraps the same `snapshot_download` call and prints the detected manifests:
+
+```bash
+bash scripts/download_benchmark_dataset.sh
+export SCIFIGURE_DATASET="${PWD}/.data/SciPanelForge/clean_tiny100.json"
+```
+
+Download ChartIDE-8B:
+
+```bash
+export HF_TOKEN="${HF_TOKEN:-}"
+export VLM_ROOT="${PWD}/.models"
+export VLM_MODEL_ROOT="${VLM_ROOT}/models"
+python - <<'PY'
+import os
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="Fengx1nn/CharTide-8B",
+    repo_type="model",
+    local_dir=".models/models/Fengx1nn/CharTide-8B",
+    token=os.environ.get("HF_TOKEN") or None,
+)
+PY
+```
+
+Mirror endpoint version:
+
+```bash
+export HF_ENDPOINT=https://hf-mirror.com
+export HF_TOKEN="${HF_TOKEN:-}"
+python - <<'PY'
+import os
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="Fengx1nn/CharTide-8B",
+    repo_type="model",
+    local_dir=".models/models/Fengx1nn/CharTide-8B",
+    token=os.environ.get("HF_TOKEN") or None,
+    endpoint="https://hf-mirror.com",
+)
+PY
+```
+
+Or use the model helper:
+
+```bash
+bash scripts/download_zeroshot_models.sh chartide_8b
+```
+
+List or download the fixed 11-model roster:
+
+```bash
+bash scripts/download_zeroshot_models.sh --list
+bash scripts/download_zeroshot_models.sh chartide_8b
+# Or download all 11 model repositories:
+bash scripts/download_zeroshot_models.sh
+```
+
+Run one model on `clean_tiny100`. This is the recommended single-model entry
+point for checking a new setup:
+
+```bash
+export SCIFIGURE_DATASET="${PWD}/SciFigure2Code/benchmark_ready/clean_tiny100.json"
+export TRANSFORMERS_OFFLINE=1
+export HF_HUB_OFFLINE=1
+bash scripts/run_zeroshot_model.sh chartide_8b 0 100 "${SCIFIGURE_DATASET}"
+```
+
+Equivalent direct Python entry:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python -m SciFigure2Code.evaluation \
+  --dataset "${SCIFIGURE_DATASET}" \
+  --model-id chartide_8b \
+  --benchmark-mode zeroshot \
+  --prompt-style short \
+  --limit 100 \
+  --max-new-tokens 2048 \
+  --gpus 0 \
+  --resume \
+  --output-dir BenchmarkRuns/chartide_8b_zeroshot_100
+```
+
+Run all 11 models:
+
+```bash
+export GPU_IDS=0
+export LIMIT=100
+bash scripts/run_zeroshot_11models.sh
+```
+
+For multi-GPU launch:
+
+```bash
+export GPU_IDS=0,1,2,3
+export RUN_PARALLEL=1
+bash scripts/run_zeroshot_11models.sh
+```
+
+Current `clean_tiny100` zero-shot smoke result:
+
+| Group | Model | Valid | Visual | Type | Layout | Data | Text | Axis | Clarity | Avg. Score |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| General VLM | Intern-S2-Preview | 84.00 | 47.51 | 64.24 | 45.83 | 47.51 | 47.51 | 47.38 | 42.76 | 51.99 |
+| General VLM | GLM-4.5V | 81.00 | 44.68 | 63.73 | 43.23 | 44.68 | 44.68 | 44.70 | 40.21 | 49.48 |
+| General VLM | LLaVA-OneVision-72B | 79.00 | 41.43 | 55.24 | 40.43 | 41.43 | 41.43 | 41.01 | 37.29 | 45.87 |
+| General VLM | Ovis2-6-80B-A3B | 71.00 | 38.85 | 53.96 | 37.51 | 38.85 | 38.85 | 39.06 | 34.96 | 42.96 |
+| General VLM | Phi-4-Reasoning-Vision-15B | 71.00 | 37.47 | 50.76 | 36.80 | 37.47 | 37.47 | 37.89 | 33.72 | 41.73 |
+| General VLM | Molmo-72B | 68.00 | 33.90 | 47.95 | 33.29 | 33.90 | 33.90 | 34.55 | 30.51 | 38.38 |
+| General VLM | Qwen3.5-122B-A10B | 66.00 | 38.06 | 50.68 | 37.23 | 38.06 | 38.06 | 38.06 | 34.26 | 41.57 |
+| General VLM | Gemma-4-31B-IT | 58.00 | 35.38 | 45.15 | 33.81 | 35.38 | 35.38 | 35.16 | 31.84 | 37.91 |
+| General VLM | Pixtral-12B | 32.00 | 16.69 | 22.25 | 16.19 | 16.69 | 16.69 | 16.60 | 15.02 | 18.49 |
+| Finetuned ChartVLM | ChartCoder | 54.00 | 28.64 | 40.75 | 27.65 | 28.64 | 28.64 | 28.80 | 25.77 | 31.93 |
+| Finetuned ChartVLM | ChartIDE-8B | 82.00 | 48.30 | 62.22 | 46.63 | 48.30 | 48.30 | 48.38 | 43.47 | 52.26 |
+
+`Avg. Score` is the mean of available P0 core metrics after execution gating. Full instructions, model paths, metric definitions, dry-run commands, and summary commands are in [Zero-Shot SciFigure2Code Benchmark](docs/zeroshot_benchmark.md). The CSV copy is [zeroshot_11models_clean_tiny100.csv](docs/assets/benchmark/zeroshot_11models_clean_tiny100.csv).
+
 ## Codex Reproduction Examples
 
 Target panels from real paper figures are shown beside Codex-rendered outputs. Each reproduction is generated from executable plotting code, not manual image editing.
@@ -283,6 +481,8 @@ Local Codex can then follow the single-panel reproduction/refine workflow withou
 forge.py                            # single public Python CLI entry point
 nature_panel_forge/                 # internal paper, figure, export, refine, and image-to-code modules
 agent_loop/                         # Codex panel splitting, manifest building, Qwen scoring
+SciFigure2Code/evaluation/          # zero-shot chart-to-code evaluator and P0/P1/P2 metrics
+SciFigure2Code/benchmark_ready/     # clean benchmark manifests and release statistics
 examples/                           # Codex reproduction and final-refine batch drivers
 scripts/                            # portable stage wrappers and skill installer
 gallery/                            # static gallery shell and catalog builder
@@ -312,6 +512,8 @@ PipelineRuns/<subject>/<topic>/run_YYYYMMDD_HHMMSS_batch001/
 - [Tutorial](TUTORIAL.md)
 - [Architecture](docs/architecture.md)
 - [Introduction and Methods](docs/intro_and_methods.md)
+- [Dataset Refinement Workflow](docs/dataset_refinement.md)
+- [Zero-Shot SciFigure2Code Benchmark](docs/zeroshot_benchmark.md)
 
 ## Citation
 

@@ -5,7 +5,9 @@ numpy>=1.24
 pandas>=2.0
 pillow>=10.0
 requests>=2.31
+seaborn>=0.13
 tqdm>=4.66
+huggingface_hub>=0.30
 
 # Optional but recommended for local Qwen scoring.
 accelerate>=0.34
@@ -17,3 +19,4 @@ transformers>=4.57
 # Optional for PDF/image utilities.
 pypdf>=4.0
 pdf2image>=1.17
+scikit-image>=0.22

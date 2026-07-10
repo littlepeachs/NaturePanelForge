@@ -65,6 +65,10 @@ docs/assets/show.mov
 
 # Model weights and local caches
 models/
+.models/
+.data/
+datasets/
+BenchmarkRuns/
 .cache/
 .deps/
 *.pt

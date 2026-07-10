@@ -1,0 +1,74 @@
+{
+  "dataset": "/ssd2/liwentao/SciFigureHub/FigureComplexityDataset_3levels_threshold_1_3_4_5_6_10",
+  "audit_root": "/ssd2/liwentao/SciFigureHub/SciFigure2Code/audits/codex_dataset_audit_first100",
+  "total_samples": 8385,
+  "status_counts": {
+    "total": 8385,
+    "complete": 8385
+  },
+  "severity_counts": {
+    "clean": 6740,
+    "minor": 1308,
+    "critical": 270,
+    "major": 67
+  },
+  "issue_flag_counts": {
+    "execution_or_artifact_problem": 59,
+    "other": 78,
+    "text_overlap": 1294,
+    "direct_image_edit": 269,
+    "plotting_logic_error": 163,
+    "pixel_painting_or_raster_tracing": 130
+  },
+  "clean_count": 6740,
+  "clean_by_subject": {
+    "materials": 352,
+    "physics": 484,
+    "biology": 651,
+    "geography": 2066,
+    "environment": 3187
+  },
+  "clean_by_subtype": {
+    "bubble_plot": 48,
+    "scatter": 601,
+    "multi_line": 1153,
+    "density": 81,
+    "line": 193,
+    "time_series": 253,
+    "box": 540,
+    "scatter_with_fit": 436,
+    "other_data_display": 218,
+    "heatmap": 486,
+    "dose_response": 74,
+    "histogram": 161,
+    "confusion_matrix": 36,
+    "violin": 170,
+    "grouped_bar": 641,
+    "umap_tsne_pca": 207,
+    "bar": 539,
+    "roc_curve": 36,
+    "table_like": 48,
+    "geospatial_map": 110,
+    "dot_plot": 272,
+    "stacked_bar": 192,
+    "matrix_plot": 11,
+    "sankey_alluvial": 8,
+    "learning_curve": 2,
+    "volcano_plot": 91,
+    "survival_curve": 80,
+    "network_plot": 15,
+    "pr_curve": 4,
+    "forest_plot": 33,
+    "calibration_curve": 1
+  },
+  "clean_by_complexity_level": {
+    "medium": 4165,
+    "high": 707,
+    "low": 1868
+  },
+  "files": {
+    "checked_in_smoke_manifest_json": "SciFigure2Code/benchmark_ready/clean_tiny100.json",
+    "checked_in_smoke_manifest_csv": "SciFigure2Code/benchmark_ready/clean_tiny100.csv",
+    "larger_manifests": "Download clean_mini500.*, clean_dev1000.*, clean_samples.*, and clean_*_paths.txt from the Hugging Face dataset release."
+  }
+}

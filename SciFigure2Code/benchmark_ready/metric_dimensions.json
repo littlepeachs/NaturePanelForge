@@ -1,0 +1,80 @@
+{
+  "reporting_policy": "Report dimensions separately. Weighted final score is optional and secondary.",
+  "core_metrics": [
+    {
+      "name": "execution_pass_rate",
+      "scale": "0/1 per sample, percentage overall",
+      "description": "Whether generated code executes and produces expected render artifacts."
+    },
+    {
+      "name": "visual_fidelity",
+      "scale": "0-100 or 0/1/2 rubric",
+      "description": "Overall visual similarity to the target scientific panel."
+    },
+    {
+      "name": "chart_type_consistency",
+      "scale": "0/1/2",
+      "description": "Whether primary and secondary chart types match the target."
+    },
+    {
+      "name": "layout_consistency",
+      "scale": "0/1/2",
+      "description": "Whether subplot, inset, legend, annotation, and spatial arrangement match."
+    },
+    {
+      "name": "data_pattern_fidelity",
+      "scale": "0/1/2",
+      "description": "Whether trends, distributions, relative values, curves, heatmap structure, and error bars match."
+    },
+    {
+      "name": "text_label_fidelity",
+      "scale": "0/1/2",
+      "description": "Whether titles, labels, tick text, legend text, and annotations are complete and correct."
+    },
+    {
+      "name": "axis_fidelity",
+      "scale": "0/1/2",
+      "description": "Whether axis range, scale type, ticks, units, and labels match."
+    },
+    {
+      "name": "legend_colorbar_completeness",
+      "scale": "0/1/2",
+      "description": "Whether legends and colorbars are present, correct, visible, and placed properly."
+    },
+    {
+      "name": "component_completeness",
+      "scale": "0/1/2",
+      "description": "Whether key components such as error bars, fit lines, confidence intervals, significance markers, reference lines, and insets are present."
+    },
+    {
+      "name": "clarity_overlap",
+      "scale": "0/1/2",
+      "description": "Whether the figure is readable without damaging overlaps, clipping, or edge loss."
+    },
+    {
+      "name": "scientific_notation_fidelity",
+      "scale": "0/1/2",
+      "description": "Whether Greek letters, superscripts/subscripts, units, gene/protein names, formulas, and mathematical symbols are rendered correctly."
+    },
+    {
+      "name": "code_validity_editability",
+      "scale": "0/1/2",
+      "description": "Whether the code is a meaningful editable plotting program instead of image copying or raster tracing."
+    }
+  ],
+  "invalidity_metrics": [
+    {
+      "name": "direct_image_dependency_rate",
+      "description": "Rate of samples where generated code loads or edits target/source/reproduction images."
+    },
+    {
+      "name": "pixel_painting_or_raster_tracing_rate",
+      "description": "Rate of samples where generated code paints pixels or traces raster regions instead of using meaningful data or plotting primitives."
+    }
+  ],
+  "required_breakdowns": [
+    "complexity_level",
+    "subject",
+    "subtype"
+  ]
+}
