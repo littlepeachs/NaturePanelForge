@@ -50,6 +50,41 @@ python -m SciFigure2Code.evaluation \
   --output-dir SciFigure2Code/evaluation/runs/mock_shard0
 ```
 
+## ICL And CoT Modes
+
+Use ICL with a held-out exemplar that includes both `reference_png` and
+`reference_code`:
+
+```bash
+python -m SciFigure2Code.evaluation \
+  --dataset SciFigure2Code/benchmark_ready/clean_tiny100.json \
+  --backend mock \
+  --benchmark-mode icl \
+  --one-shot-sample-id 10-1038-s41467-025-66220-x__fig05_b \
+  --limit 10 \
+  --output-dir BenchmarkRuns/mock_icl
+```
+
+Models with verified multi-image support receive the exemplar render and target
+as two images. Single-image models receive a labeled `EXAMPLE | TARGET` tile.
+The evaluator writes the tile to each sample directory for inspection.
+
+CoT is a separate reasoning pass followed by a code-only answer pass, rather
+than comments mixed into executable code:
+
+```bash
+python -m SciFigure2Code.evaluation \
+  --dataset SciFigure2Code/benchmark_ready/clean_tiny100.json \
+  --backend mock \
+  --benchmark-mode cot \
+  --cot-reasoning-tokens 768 \
+  --limit 1 \
+  --output-dir BenchmarkRuns/mock_cot
+```
+
+Each CoT sample records `reasoning_prompt.txt`, `reasoning_output.txt`, and
+the final `prompt.txt`; run summaries include CoT completion fields.
+
 ## Local Transformers Backend
 
 ```bash

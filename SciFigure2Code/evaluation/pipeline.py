@@ -14,7 +14,13 @@ from .agents import CodeReviewAgent, CodeWritingAgent
 from .backends.base import CodeGenerationBackend
 from .code_extract import extract_python_code
 from .metrics import P0_METRICS, P1_METRICS, P2_METRICS, compute_basic_metrics, compute_benchmark_metrics
-from .prompts import PromptConfig, build_prompt_bundle
+from .prompts import (
+    PromptConfig,
+    build_cot_answer_prompt,
+    build_cot_reasoning_prompt,
+    build_prompt_bundle,
+    materialize_prompt_bundle,
+)
 from .runner import CodeRunner, RunnerConfig
 from .schemas import Sample
 from .utils import ensure_dir, load_json, now_iso, safe_name, stable_json_hash, write_json
@@ -117,8 +123,8 @@ def _evaluate_one(
     one_shot_sample: Sample | None,
 ) -> dict[str, Any]:
     prompt_bundle = build_prompt_bundle(sample, config.prompt, one_shot_sample=one_shot_sample)
+    prompt_bundle = materialize_prompt_bundle(prompt_bundle, sample_dir)
     prompt = prompt_bundle.prompt
-    (sample_dir / "prompt.txt").write_text(prompt, encoding="utf-8")
     write_json(sample_dir / "prompt_bundle.json", prompt_bundle)
     write_json(sample_dir / "sample_record.json", sample.to_json_dict())
     local_targets = _copy_target_artifacts(sample, sample_dir)
@@ -139,6 +145,8 @@ def _evaluate_one(
             "sample_dir": sample_dir,
             "prompt": sample_dir / "prompt.txt",
             "prompt_bundle": sample_dir / "prompt_bundle.json",
+            "reasoning_prompt": sample_dir / "reasoning_prompt.txt",
+            "reasoning_output": sample_dir / "reasoning_output.txt",
             **local_targets,
             "raw_model_output": sample_dir / "model_output.txt",
             "candidate_code": sample_dir / "candidate.py",
@@ -148,6 +156,50 @@ def _evaluate_one(
     }
 
     try:
+        if prompt_bundle.mode in {"cot", "oneshot_cot"}:
+            reasoning_prompt = build_cot_reasoning_prompt(prompt_bundle)
+            (sample_dir / "reasoning_prompt.txt").write_text(reasoning_prompt, encoding="utf-8")
+            reasoning_generation = writer_agent.generate(
+                sample=sample,
+                prompt=reasoning_prompt,
+                image_paths=prompt_bundle.image_paths,
+                output_dir=sample_dir,
+                options={
+                    "prompt_mode": prompt_bundle.mode,
+                    "prompt_style": prompt_bundle.style,
+                    "generation_stage": "reasoning",
+                    "max_new_tokens": config.prompt.cot_reasoning_tokens,
+                    "one_shot_strategy": prompt_bundle.one_shot_strategy,
+                    "exemplar_panel_id": prompt_bundle.exemplar_panel_id,
+                },
+            )
+            reasoning_text = reasoning_generation.text.strip()
+            if not reasoning_text:
+                raise RuntimeError("CoT reasoning stage returned empty output")
+            (sample_dir / "reasoning_output.txt").write_text(reasoning_generation.text, encoding="utf-8")
+            result["cot"] = {
+                "requested": True,
+                "method": "two_stage_reason_then_code",
+                "reasoning_ok": True,
+                "reasoning_chars": len(reasoning_text),
+                "plan_complete_marker": "PLAN_COMPLETE" in reasoning_text,
+                "metadata": reasoning_generation.metadata,
+            }
+            prompt = build_cot_answer_prompt(
+                prompt,
+                reasoning_text,
+                max_chars=config.prompt.max_cot_reasoning_chars,
+            )
+        else:
+            result["cot"] = {
+                "requested": False,
+                "method": "none",
+                "reasoning_ok": False,
+                "reasoning_chars": 0,
+                "plan_complete_marker": False,
+            }
+
+        (sample_dir / "prompt.txt").write_text(prompt, encoding="utf-8")
         generation = writer_agent.write_code(
             sample=sample,
             prompt=prompt,
@@ -156,11 +208,20 @@ def _evaluate_one(
             options={
                 "prompt_mode": prompt_bundle.mode,
                 "prompt_style": prompt_bundle.style,
+                "generation_stage": "answer",
                 "one_shot_strategy": prompt_bundle.one_shot_strategy,
                 "exemplar_panel_id": prompt_bundle.exemplar_panel_id,
             },
         )
     except Exception as exc:
+        if prompt_bundle.mode in {"cot", "oneshot_cot"} and "cot" not in result:
+            result["cot"] = {
+                "requested": True,
+                "method": "two_stage_reason_then_code",
+                "reasoning_ok": False,
+                "reasoning_chars": 0,
+                "plan_complete_marker": False,
+            }
         result["backend"].update({"ok": False, "error": f"{exc.__class__.__name__}: {exc}"})
         result["writer_agent"].update({"ok": False, "error": f"{exc.__class__.__name__}: {exc}"})
         result["review_agent"]["after_backend"] = reviewer_agent.review(
@@ -345,6 +406,11 @@ def _summary_columns() -> list[str]:
         "prompt_style",
         "one_shot_strategy",
         "exemplar_panel_id",
+        "cot_requested",
+        "cot_method",
+        "cot_reasoning_ok",
+        "cot_reasoning_chars",
+        "cot_plan_complete_marker",
         "backend",
         "backend_ok",
         "code_compile_ok",
@@ -393,6 +459,7 @@ def _summary_row(result: dict[str, Any]) -> dict[str, Any]:
     backend = result.get("backend", {})
     model = result.get("model", {})
     prompt_bundle = result.get("prompt_bundle", {})
+    cot = result.get("cot", {})
     review = (
         result.get("review_agent", {}).get("after_execution")
         or result.get("review_agent", {}).get("after_extraction")
@@ -417,6 +484,11 @@ def _summary_row(result: dict[str, Any]) -> dict[str, Any]:
         "prompt_style": _field(prompt_bundle, "style"),
         "one_shot_strategy": _field(prompt_bundle, "one_shot_strategy"),
         "exemplar_panel_id": _field(prompt_bundle, "exemplar_panel_id"),
+        "cot_requested": cot.get("requested", False),
+        "cot_method": cot.get("method", "none"),
+        "cot_reasoning_ok": cot.get("reasoning_ok", False),
+        "cot_reasoning_chars": cot.get("reasoning_chars", 0),
+        "cot_plan_complete_marker": cot.get("plan_complete_marker", False),
         "backend": backend.get("name", ""),
         "backend_ok": backend.get("ok", False),
         "code_compile_ok": _field(code_extraction, "compile_ok"),
@@ -470,6 +542,14 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "executed_count": sum(1 for row in rows if _as_bool(row.get("command_success"))),
         "failed_count": sum(1 for row in rows if not _as_bool(row.get("command_success"))),
         "backend_ok": _rate(rows, "backend_ok"),
+        "cot_reasoning_ok": _rate([row for row in rows if _as_bool(row.get("cot_requested"))], "cot_reasoning_ok")
+        if any(_as_bool(row.get("cot_requested")) for row in rows)
+        else None,
+        "cot_plan_complete_marker": _rate(
+            [row for row in rows if _as_bool(row.get("cot_requested"))], "cot_plan_complete_marker"
+        )
+        if any(_as_bool(row.get("cot_requested")) for row in rows)
+        else None,
         "code_compile_ok": _rate(rows, "code_compile_ok"),
         "command_success": _rate(rows, "command_success"),
         "execution_pass_rate": _rate(rows, "command_success"),
@@ -595,6 +675,7 @@ def _run_signature(backend: CodeGenerationBackend, config: EvalConfig) -> str:
     return stable_json_hash(
         {
             "backend_name": backend.name,
+            "evaluation_protocol": "v2_icl_tile_two_stage_cot",
             "backend_class": backend.__class__.__module__ + "." + backend.__class__.__name__,
             "model": config.model,
             "runner": config.runner,

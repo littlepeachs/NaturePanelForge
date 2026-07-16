@@ -76,7 +76,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--benchmark-mode",
         default="zeroshot",
-        choices=["zeroshot", "cot", "oneshot", "oneshot_cot"],
+        choices=["zeroshot", "cot", "icl", "oneshot", "oneshot_cot"],
         help="Prompting mode for this run.",
     )
     parser.add_argument("--all-modes", action="store_true", help="Run or dry-run all four benchmark modes.")
@@ -84,6 +84,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-caption-chars", type=int, default=2500)
     parser.add_argument("--max-description-chars", type=int, default=3000)
     parser.add_argument("--max-one-shot-code-chars", type=int, default=32000)
+    parser.add_argument("--cot-reasoning-tokens", type=int, default=768)
+    parser.add_argument("--max-cot-reasoning-chars", type=int, default=8000)
 
     parser.add_argument("--mock-mode", default="copy_target", choices=["copy_target", "reference"], help="Mock backend behavior.")
     parser.add_argument("--model-path", default=None, help="Local model directory for transformers backend.")
@@ -102,6 +104,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.benchmark_mode == "icl":
+        args.benchmark_mode = "oneshot"
     if args.list_models:
         _list_models(Path(args.vlm_root).expanduser(), include_inventory=True)
         return 0
@@ -262,6 +266,9 @@ def _eval_config(args: argparse.Namespace, output_dir: Path, one_shot_sample) ->
             max_caption_chars=args.max_caption_chars,
             max_description_chars=args.max_description_chars,
             max_one_shot_code_chars=args.max_one_shot_code_chars,
+            max_cot_reasoning_chars=args.max_cot_reasoning_chars,
+            cot_reasoning_tokens=args.cot_reasoning_tokens,
+            supports_multi_image=bool(spec.supports_multi_image) if spec else False,
         ),
         one_shot_sample=one_shot_sample,
         model=model,
@@ -277,7 +284,12 @@ def _select_one_shot_sample(loader: DatasetLoader, args: argparse.Namespace, sam
         pool = loader.load(sample_ids=[args.one_shot_sample_id], require_target=not args.allow_missing_target)
         if not pool:
             raise SystemExit(f"--one-shot-sample-id not found: {args.one_shot_sample_id}")
-        return pool[0]
+        exemplar = pool[0]
+        if not exemplar.reference_code or not exemplar.reference_code.exists():
+            raise SystemExit(f"--one-shot-sample-id has no readable reference_code: {args.one_shot_sample_id}")
+        if not exemplar.reference_png or not exemplar.reference_png.exists():
+            raise SystemExit(f"--one-shot-sample-id has no readable reference_png: {args.one_shot_sample_id}")
+        return exemplar
 
     selected_ids = {sample.panel_id for sample in samples}
     pool = loader.load(
@@ -287,13 +299,14 @@ def _select_one_shot_sample(loader: DatasetLoader, args: argparse.Namespace, sam
         require_target=not args.allow_missing_target,
     )
     for candidate in pool:
-        if candidate.panel_id not in selected_ids and candidate.reference_code and candidate.reference_code.exists():
+        if (
+            candidate.panel_id not in selected_ids
+            and candidate.reference_code
+            and candidate.reference_code.exists()
+            and candidate.reference_png
+            and candidate.reference_png.exists()
+        ):
             return candidate
-    for candidate in pool:
-        if candidate.panel_id not in selected_ids:
-            return candidate
-    if len(samples) > 1:
-        return samples[1]
     raise SystemExit("One-shot modes require at least one exemplar sample; provide --one-shot-sample-id.")
 
 

@@ -25,6 +25,16 @@ class CodeWritingAgent:
         output_dir: Path,
         options: dict[str, Any] | None = None,
     ) -> GenerationResult:
+        return self.generate(sample, prompt, image_paths, output_dir, options)
+
+    def generate(
+        self,
+        sample: Sample,
+        prompt: str,
+        image_paths: list[Path],
+        output_dir: Path,
+        options: dict[str, Any] | None = None,
+    ) -> GenerationResult:
         max_images = int(getattr(self.backend, "max_images", 1) or 1)
         if len(image_paths) > max_images:
             raise ValueError(f"Backend {self.backend.name} accepts at most {max_images} image(s), got {len(image_paths)}")

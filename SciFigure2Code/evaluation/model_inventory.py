@@ -46,7 +46,7 @@ class LocalModelSpec:
 
     @property
     def one_shot_image_strategy(self) -> str:
-        return "native_multi_image" if self.supports_multi_image else "text_exemplar_single_image"
+        return "native_multi_image" if self.supports_multi_image else "tiled_single_image"
 
     def to_json_dict(self) -> dict[str, Any]:
         return {
@@ -102,7 +102,7 @@ LOCAL_MODEL_SPECS: tuple[LocalModelSpec, ...] = (
         1,
         True,
         False,
-        "Use text exemplar for one-shot until a multi-image Phi adapter is verified.",
+        "Use a labeled exemplar-target tile until a multi-image Phi adapter is verified.",
     ),
     LocalModelSpec(
         "kimi_vl_a3b_thinking",
@@ -225,7 +225,7 @@ LOCAL_MODEL_SPECS: tuple[LocalModelSpec, ...] = (
         1,
         False,
         False,
-        "Use text exemplar for one-shot until a multi-image Molmo adapter is verified.",
+        "Use a labeled exemplar-target tile until a multi-image Molmo adapter is verified.",
     ),
     LocalModelSpec(
         "qwen3_vl_235b_a22b",
